@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
+// SPDX-License-Identifier: MIT or Apache-2.0
+
 use std::{collections::HashMap, path::PathBuf};
 
 use cxx_qt_build::CxxQtBuilder;

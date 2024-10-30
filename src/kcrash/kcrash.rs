@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2024 Jonah Brüchert <jbb@kaidan.im>
+// SPDX-License-Identifier: MIT or Apache-2.0
+
 #[cxx_qt::bridge]
 mod ffi {
     #[namespace = "rust::kf6"]
@@ -9,8 +12,7 @@ mod ffi {
     }
 }
 
-pub struct KCrash {
-}
+pub struct KCrash {}
 
 impl KCrash {
     pub fn initialize() {
