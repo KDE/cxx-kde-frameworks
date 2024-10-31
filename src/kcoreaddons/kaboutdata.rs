@@ -99,12 +99,8 @@ impl KAboutData {
         )
     }
 
-    pub fn set_application_data(about_data: UniquePtr<KAboutData>) {
-        if let Some(data) = about_data.as_ref() {
-            ffi::set_application_data(data);
-        } else {
-            eprintln!("KAboutData couldn't be unwrapped");
-        }
+    pub fn set_application_data(about_data: &KAboutData) {
+        ffi::set_application_data(about_data);
     }
 
     pub fn add_author(self: Pin<&mut KAboutData>, author: KAuthor) -> Pin<&mut KAboutData> {
