@@ -7,6 +7,9 @@ mod ffi {
         include!("cxx-qt-lib/qurl.h");
         type QUrl = cxx_qt_lib::QUrl;
 
+        include!("cxx-qt-lib-extras/qcommandlineparser.h");
+        type QCommandLineParser = cxx_qt_lib_extras::QCommandLineParser;
+
         include!("cxx-kde-frameworks/kaboutdata.h");
         type KAboutData;
 
@@ -37,6 +40,19 @@ mod ffi {
             email_address: &QString,
         ) -> Pin<&mut KAboutData>;
 
+        #[doc(hidden)]
+        #[rust_name = "setup_command_line_raw"]
+        unsafe fn setupCommandLine(
+            self: Pin<&mut KAboutData>,
+            parser: *mut QCommandLineParser,
+        ) -> bool;
+
+        #[doc(hidden)]
+        #[rust_name = "process_command_line_raw"]
+        unsafe fn processCommandLine(
+            self: Pin<&mut KAboutData>,
+            parser: *mut QCommandLineParser,
+        );
     }
 
     #[namespace = "rust::kf6"]
@@ -58,6 +74,7 @@ use std::pin::Pin;
 
 use cxx::UniquePtr;
 use cxx_qt_lib::QString;
+use cxx_qt_lib_extras::QCommandLineParser;
 pub use ffi::KAboutData;
 
 use super::KAuthor;
@@ -115,5 +132,23 @@ impl KAboutData {
         translator: KTranslator,
     ) -> Pin<&mut KAboutData> {
         return self.set_translator_raw(&translator.name, &translator.email_address);
+    }
+
+    pub fn setup_command_line(
+        self: Pin<&mut KAboutData>,
+        parser: &mut QCommandLineParser,
+    ) -> bool {
+        unsafe {
+            self.setup_command_line_raw(&mut *parser)
+        }
+    }
+
+    pub fn process_command_line(
+        self: Pin<&mut KAboutData>,
+        parser: &mut QCommandLineParser,
+    ) {
+         unsafe {
+            self.process_command_line_raw(&mut *parser);
+        }
     }
 }
