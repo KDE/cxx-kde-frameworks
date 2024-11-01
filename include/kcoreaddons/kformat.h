@@ -21,5 +21,8 @@ using KFormatBinarySizeUnits = KFormat::BinarySizeUnits;
 
 using KFormatUnitPrefix = KFormat::UnitPrefix;
 
+QString formatSpelloutDuration(const KFormat &fmt, uint64_t msecs);
+QString formatDecimalDuration(const KFormat &fmt, uint64_t msecs, int32_t decimalPlaces);
+
 } // namespace kf6
 } // namespace rust

@@ -3,6 +3,7 @@
 
 use cxx::{type_id, ExternType};
 use std::mem::MaybeUninit;
+use cxx_qt_lib::QString;
 
 #[cxx_qt::bridge()]
 mod ffi {
@@ -58,6 +59,15 @@ mod ffi {
         Yotta,
     }
 
+    #[namespace = "rust::kf6"]
+    unsafe extern "C++" {
+        #[rust_name = "format_spellout_duration"]
+        fn formatSpelloutDuration(fmt: &KFormat, msecs: u64) -> QString;
+
+        #[rust_name = "format_decimal_duration"]
+        fn formatDecimalDuration(fmt: &KFormat, msecs: u64, decimalPlaces: i32) -> QString;
+    }
+
     unsafe extern "C++" {
         include!("cxx-qt-lib/qstring.h");
         type QString = cxx_qt_lib::QString;
@@ -67,15 +77,6 @@ mod ffi {
 
         // include!("cxx-qt-lib/qdate.h");
         // type QDate = cxx_qt_lib::QDate;
-
-        // TODO u64 doesn't work
-        // #[rust_name = "format_spellout_duration"]
-        // fn formatSpelloutDuration(self: &KFormat, msecs: u64) -> QString;
-
-        // TODO u64 doesn't work
-        // QString formatDecimalDuration(quint64 msecs, int decimalPlaces = 2) const;
-        // #[rust_name = "format_decimal_duration"]
-        // fn formatDecimalDuration(self: &KFormat, msecs: u64, decimalPlaces: i32) -> QString;
 
         #[rust_name = "format_byte_size"]
         fn formatByteSize(
@@ -143,6 +144,16 @@ impl Default for KFormat {
 impl Drop for KFormat {
     fn drop(&mut self) {
         ffi::kformat_drop(self);
+    }
+}
+
+impl KFormat {
+    pub fn format_spellout_duration(&self, msecs: u64) -> QString {
+        ffi::format_spellout_duration(self, msecs)
+    }
+
+    pub fn format_decimal_duration(&self, msecs: u64, decimal_places: i32) -> QString {
+        ffi::format_decimal_duration(self, msecs, decimal_places)
     }
 }
 
