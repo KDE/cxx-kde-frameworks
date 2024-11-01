@@ -21,15 +21,15 @@ mod tests {
     fn test_add() {
         let fm = KFormat::default();
 
-        // assert_eq!(
-        //     fm.format_spellout_duration(1234),
-        //     QString::from("1 second(s)")
-        // );
+        assert_eq!(
+            fm.format_spellout_duration(1234),
+            QString::from("1 second(s)")
+        );
 
-        // assert_eq!(
-        //     fm.format_decimal_duration(1234, 2),
-        //     QString::from("1,23 seconds")
-        // );
+        assert_eq!(
+            fm.format_decimal_duration(1234, 2),
+            QString::from("1,23 seconds")
+        );
 
         assert_eq!(
             fm.format_byte_size(
