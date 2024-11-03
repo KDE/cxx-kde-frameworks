@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
-// SPDX-License-Identifier: MIT or Apache-2.0
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include "cxx-kde-frameworks/klocalizedstring.h"
 
