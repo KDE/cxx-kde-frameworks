@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
-// SPDX-License-Identifier: LGPL-2.0-or-later
+// SPDX-License-Identifier: MPL-2.0
 
 mod kf6_build;
 use std::path::PathBuf;
