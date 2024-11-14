@@ -15,5 +15,14 @@ auto from(QString componentName, QString displayName, QString version,
           QString shortDescription, int license) -> std::unique_ptr<KAboutData>;
 
 void setApplicationData(const KAboutData &aboutData);
+
 } // namespace kf6
 } // namespace rust
+
+namespace rust {
+
+template<>
+struct IsRelocatable<KAboutPerson> : ::std::true_type
+{};
+
+}
