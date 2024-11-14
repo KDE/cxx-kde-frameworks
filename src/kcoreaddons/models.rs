@@ -1,25 +1,5 @@
 use cxx_qt_lib::{QString, QUrl};
 
-pub struct KAuthor {
-    pub name: QString,
-    pub task: QString,
-    pub email_address: QString,
-    pub web_address: QString,
-    pub avatar_url: QUrl,
-}
-
-impl Default for KAuthor {
-    fn default() -> Self {
-        return Self {
-            name: QString::from("Author"),
-            task: QString::from(""),
-            email_address: QString::from(""),
-            web_address: QString::from(""),
-            avatar_url: QUrl::from(""),
-        };
-    }
-}
-
 pub struct KCredit {
     pub name: QString,
     pub task: QString,

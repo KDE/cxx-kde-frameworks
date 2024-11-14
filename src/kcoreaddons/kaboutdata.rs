@@ -1,3 +1,7 @@
+use cxx::{type_id, ExternType};
+use ffi::kaboutperson_init;
+use std::mem::MaybeUninit;
+
 #[cxx_qt::bridge]
 mod ffi {
 
@@ -12,16 +16,27 @@ mod ffi {
 
         include!("cxx-kde-frameworks/kaboutdata.h");
         type KAboutData;
+        type KAboutPerson = super::KAboutPerson;
 
-        #[rust_name = "add_author_raw"]
-        fn addAuthor(
-            self: Pin<&mut KAboutData>,
-            name: &QString,
-            task: &QString,
-            email_address: &QString,
-            web_address: &QString,
-            avatar_url: &QUrl,
-        ) -> Pin<&mut KAboutData>;
+
+        fn name(self: &KAboutPerson) -> QString;
+
+        fn task(self: &KAboutPerson) -> QString;
+
+        #[rust_name = "email_address"]
+        fn emailAddress(self: &KAboutPerson) -> QString;
+
+        #[rust_name = "web_address"]
+        fn webAddress(self: &KAboutPerson) -> QString;
+
+        #[rust_name = "avatar_url"]
+        fn avatarUrl(self: &KAboutPerson) -> QUrl;
+
+        // static KAboutPerson fromJSON(const QJsonObject &obj);
+        // Needs QJsonObject
+
+        #[rust_name = "add_author"]
+        fn addAuthor(self: Pin<&mut KAboutData>, author: &KAboutPerson) -> Pin<&mut KAboutData>;
 
         #[rust_name = "add_credit_raw"]
         fn addCredit(
@@ -67,17 +82,37 @@ mod ffi {
 
         #[rust_name = "set_application_data"]
         fn setApplicationData(about_data: &KAboutData);
+
+        #[doc(hidden)]
+        #[rust_name = "kaboutperson_init_default"]
+        fn kaboutperson_init_default() -> KAboutPerson;
+
+        #[doc(hidden)]
+        #[rust_name = "kaboutperson_init"]
+        fn kaboutperson_init(
+            name: &QString,
+            task: &QString,
+            email_address: &QString,
+            web_address: &QString,
+            avatar_url: &QUrl,
+        ) -> KAboutPerson;
+
     }
+}
+
+#[repr(C)]
+pub struct KAboutPerson {
+    _cspec: MaybeUninit<usize>,
 }
 
 use std::pin::Pin;
 
 use cxx::UniquePtr;
 use cxx_qt_lib::QString;
+use cxx_qt_lib::QUrl;
 use cxx_qt_lib_extras::QCommandLineParser;
 pub use ffi::KAboutData;
 
-use super::KAuthor;
 use super::KCredit;
 use super::KTranslator;
 use super::License;
@@ -101,16 +136,6 @@ impl KAboutData {
 
     pub fn set_application_data(about_data: &KAboutData) {
         ffi::set_application_data(about_data);
-    }
-
-    pub fn add_author(self: Pin<&mut KAboutData>, author: KAuthor) -> Pin<&mut KAboutData> {
-        return self.add_author_raw(
-            &author.name,
-            &author.task,
-            &author.email_address,
-            &author.web_address,
-            &author.avatar_url,
-        );
     }
 
     pub fn add_credit(self: Pin<&mut KAboutData>, credit: KCredit) -> Pin<&mut KAboutData> {
@@ -147,4 +172,29 @@ impl KAboutData {
             self.process_command_line_raw(&mut *parser);
         }
     }
+}
+
+impl KAboutPerson {
+    pub fn from(
+        name: &QString,
+        task: &QString,
+        email_address: &QString,
+        web_address: &QString,
+        avatar_url: &QUrl,
+    ) -> KAboutPerson {
+        kaboutperson_init(name, task, email_address, web_address, avatar_url)
+    }
+}
+impl Default for KAboutPerson {
+    fn default() -> Self {
+        ffi::kaboutperson_init_default()
+    }
+}
+
+// Safety:
+
+// Static checks on the C++ side ensure that KAboutPerson is trivial.
+unsafe impl ExternType for KAboutPerson {
+    type Id = type_id!("KAboutPerson");
+    type Kind = cxx::kind::Trivial;
 }
