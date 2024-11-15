@@ -3,7 +3,12 @@ use std::path::PathBuf;
 use cmake_package::find_package;
 use cxx_qt_build::CxxQtBuilder;
 
-const LIBRARIES: [&str; 3] = ["CoreAddons", "I18n", "Crash"];
+// list of (LibraryName, [LibraryTargets])
+const LIBRARIES: [(&str, &[&str]); 3] = [
+    ("KF6CoreAddons", &["KF6::CoreAddons"]),
+    ("KF6I18n", &["KF6::I18n"]),
+    ("KF6Crash", &["KF6::Crash"]),
+];
 
 fn main() {
     write_headers();
@@ -81,15 +86,18 @@ fn header_dir() -> PathBuf {
 fn setup_linker(builder: CxxQtBuilder) -> CxxQtBuilder {
     let mut directories = Vec::new();
 
-    for name in LIBRARIES {
-        let lib_name = format!("KF6{}", name);
-        match find_package(lib_name.clone()).find() {
-            Err(_) => panic!("Cannot find KF6 {name}"),
+    for (name, targets) in LIBRARIES {
+        match find_package(name).find() {
+            Err(_) => panic!("Cannot find {name}"),
             Ok(package) => {
-                println!("cargo:rustc-link-lib={}", lib_name);
-                let lib = package.target(format!("KF6::{}", name)).unwrap();
-                for dir in lib.include_directories {
-                    directories.push(dir);
+                for target in targets {
+                    let cmake_target = package.target(target.to_owned()).unwrap();
+                    for link in cmake_target.link_libraries {
+                        println!("cargo:rustc-link-lib={}", link);
+                    }
+                    for dir in cmake_target.include_directories {
+                        directories.push(dir);
+                    }
                 }
             }
         }
