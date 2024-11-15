@@ -1,2 +1,4 @@
 /target
 /.ccls-cache
+
+Cargo.lock
