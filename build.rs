@@ -92,9 +92,7 @@ fn setup_linker(builder: CxxQtBuilder) -> CxxQtBuilder {
             Ok(package) => {
                 for target in targets {
                     let cmake_target = package.target(target.to_owned()).unwrap();
-                    for link in cmake_target.link_libraries {
-                        println!("cargo:rustc-link-lib={}", link);
-                    }
+                    cmake_target.link();
                     for dir in cmake_target.include_directories {
                         directories.push(dir);
                     }
