@@ -6,3 +6,4 @@ pub mod kcoreaddons;
 pub mod kcrash;
 pub mod ki18n;
 pub mod kiconthemes;
+pub mod kio;

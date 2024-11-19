@@ -13,6 +13,7 @@ const LIBRARIES: &[(&str, &[&str])] = &[
     ("KF6Crash", &["KF6::Crash"]),
     ("KF6IconThemes", &["KF6::IconThemes"]),
     ("KF6ConfigWidgets", &["KF6::ConfigWidgets"]),
+    ("KF6KIO", &["KF6::KIOCore"]),
 ];
 
 fn main() {
@@ -34,6 +35,8 @@ fn main() {
         "kcrash/kcrash",
         "kiconthemes/kicontheme",
         "kconfigwidgets/kstylemanager",
+        "kio/workerbase",
+        "kio/udsentry",
     ];
 
     for source in &rust_files {
@@ -47,6 +50,8 @@ fn main() {
         "ki18n/klocalizedstring",
         "kcrash/kcrash",
         "kiconthemes/kicontheme",
+        "kio/workerbase",
+        "kio/udsentry",
     ];
 
     builder = builder.cc_builder(move |cc| {
@@ -68,6 +73,7 @@ fn write_headers() {
     write_headers_in("kcrash");
     write_headers_in("kiconthemes");
     write_headers_in("kconfigwidgets");
+    write_headers_in("kio");
 }
 
 fn write_headers_in(subfolder: &str) {
