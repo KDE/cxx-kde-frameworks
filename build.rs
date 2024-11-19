@@ -23,6 +23,7 @@ fn main() {
 
     let rust_files = vec![
         "kcoreaddons/kaboutdata",
+        "kcoreaddons/ksandbox",
         "ki18n/klocalizedcontext",
         "ki18n/klocalizedstring",
         "kcrash/kcrash",
@@ -34,6 +35,7 @@ fn main() {
 
     let cpp_files = vec![
         "kcoreaddons/kaboutdata",
+        "kcoreaddons/ksandbox",
         "ki18n/klocalizedcontext",
         "ki18n/klocalizedstring",
         "kcrash/kcrash",

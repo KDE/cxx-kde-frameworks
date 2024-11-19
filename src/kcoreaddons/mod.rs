@@ -1,4 +1,5 @@
 mod kaboutdata;
+pub mod ksandbox;
 mod license;
 mod models;
 
