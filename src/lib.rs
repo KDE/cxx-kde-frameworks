@@ -33,3 +33,5 @@ pub mod kconfigwidgets;
 ///
 /// [C++ API documentation](https://api-staging.kde.org/kcmutils-index.html)
 pub mod kcmutils;
+
+pub mod kio;
