@@ -49,10 +49,7 @@ mod ffi {
 
         #[doc(hidden)]
         #[rust_name = "process_command_line_raw"]
-        unsafe fn processCommandLine(
-            self: Pin<&mut KAboutData>,
-            parser: *mut QCommandLineParser,
-        );
+        unsafe fn processCommandLine(self: Pin<&mut KAboutData>, parser: *mut QCommandLineParser);
     }
 
     #[namespace = "rust::kf6"]
@@ -130,20 +127,12 @@ impl KAboutData {
         return self.set_translator_raw(&translator.name, &translator.email_address);
     }
 
-    pub fn setup_command_line(
-        self: Pin<&mut KAboutData>,
-        parser: &mut QCommandLineParser,
-    ) -> bool {
-        unsafe {
-            self.setup_command_line_raw(&mut *parser)
-        }
+    pub fn setup_command_line(self: Pin<&mut KAboutData>, parser: &mut QCommandLineParser) -> bool {
+        unsafe { self.setup_command_line_raw(&mut *parser) }
     }
 
-    pub fn process_command_line(
-        self: Pin<&mut KAboutData>,
-        parser: &mut QCommandLineParser,
-    ) {
-         unsafe {
+    pub fn process_command_line(self: Pin<&mut KAboutData>, parser: &mut QCommandLineParser) {
+        unsafe {
             self.process_command_line_raw(&mut *parser);
         }
     }

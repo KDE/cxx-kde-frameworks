@@ -9,8 +9,7 @@ mod ffi {
     }
 }
 
-pub struct KCrash {
-}
+pub struct KCrash {}
 
 impl KCrash {
     pub fn initialize() {
