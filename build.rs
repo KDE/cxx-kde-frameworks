@@ -13,6 +13,7 @@ const LIBRARIES: &[(&str, &[&str])] = &[
     ("KF6Crash", &["KF6::Crash"]),
     ("KF6IconThemes", &["KF6::IconThemes"]),
     ("KF6ConfigWidgets", &["KF6::ConfigWidgets"]),
+    ("KF6KCMUtils", &["KF6::KCMUtilsQuick"]),
 ];
 
 fn main() {
@@ -29,11 +30,13 @@ fn main() {
     let rust_files = vec![
         "kcoreaddons/kaboutdata",
         "kcoreaddons/kformat",
+        "kcoreaddons/kpluginmetadata",
         "ki18n/klocalizedcontext",
         "ki18n/klocalizedstring",
         "kcrash/kcrash",
         "kiconthemes/kicontheme",
         "kconfigwidgets/kstylemanager",
+        "kcmutils/kquickconfigmodule",
     ];
 
     for source in &rust_files {
@@ -43,10 +46,12 @@ fn main() {
     let cpp_files = vec![
         "kcoreaddons/kaboutdata",
         "kcoreaddons/kformat",
+        "kcoreaddons/kpluginmetadata",
         "ki18n/klocalizedcontext",
         "ki18n/klocalizedstring",
         "kcrash/kcrash",
         "kiconthemes/kicontheme",
+        "kcmutils/kquickconfigmodule",
     ];
 
     builder = builder.cc_builder(move |cc| {
@@ -68,6 +73,7 @@ fn write_headers() {
     write_headers_in("kcrash");
     write_headers_in("kiconthemes");
     write_headers_in("kconfigwidgets");
+    write_headers_in("kcmutils");
 }
 
 fn write_headers_in(subfolder: &str) {
