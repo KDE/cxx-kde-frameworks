@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 pub mod kconfigwidgets;
+pub mod kcmutils;
 pub mod kcoreaddons;
 pub mod kcrash;
 pub mod ki18n;
