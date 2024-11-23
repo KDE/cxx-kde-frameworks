@@ -10,3 +10,4 @@ Dependencies:
     'frameworks/kcrash': '@latest-kf6'
     'frameworks/kiconthemes': '@latest-kf6'
     'frameworks/kconfigwidgets': '@latest-kf6'
+    'frameworks/kcmutils': '@latest-kf6'

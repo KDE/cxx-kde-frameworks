@@ -5,6 +5,7 @@
 compile_error!("cxxqt_qt_version_major must be either \"5\" or \"6\"");
 
 pub mod kconfigwidgets;
+pub mod kcmutils;
 pub mod kcoreaddons;
 pub mod kcrash;
 pub mod ki18n;
