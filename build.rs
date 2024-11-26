@@ -7,10 +7,12 @@ use cmake_package::find_package;
 use cxx_qt_build::CxxQtBuilder;
 
 // list of (LibraryName, [LibraryTargets])
-const LIBRARIES: [(&str, &[&str]); 3] = [
+const LIBRARIES: &[(&str, &[&str])] = &[
     ("KF6CoreAddons", &["KF6::CoreAddons"]),
     ("KF6I18n", &["KF6::I18n"]),
     ("KF6Crash", &["KF6::Crash"]),
+    ("KF6IconThemes", &["KF6::IconThemes"]),
+    ("KF6ConfigWidgets", &["KF6::ConfigWidgets"]),
 ];
 
 fn main() {
@@ -30,6 +32,8 @@ fn main() {
         "ki18n/klocalizedcontext",
         "ki18n/klocalizedstring",
         "kcrash/kcrash",
+        "kiconthemes/kicontheme",
+        "kconfigwidgets/kstylemanager",
     ];
 
     for source in &rust_files {
@@ -42,6 +46,7 @@ fn main() {
         "ki18n/klocalizedcontext",
         "ki18n/klocalizedstring",
         "kcrash/kcrash",
+        "kiconthemes/kicontheme",
     ];
 
     builder = builder.cc_builder(move |cc| {
@@ -61,6 +66,8 @@ fn write_headers() {
     write_headers_in("kcoreaddons");
     write_headers_in("ki18n");
     write_headers_in("kcrash");
+    write_headers_in("kiconthemes");
+    write_headers_in("kconfigwidgets");
 }
 
 fn write_headers_in(subfolder: &str) {
@@ -92,10 +99,10 @@ fn setup_linker(builder: CxxQtBuilder) -> CxxQtBuilder {
     let mut directories = Vec::new();
 
     for (name, targets) in LIBRARIES {
-        match find_package(name).find() {
+        match find_package(*name).find() {
             Err(_) => panic!("Cannot find {name}"),
             Ok(package) => {
-                for target in targets {
+                for target in *targets {
                     let cmake_target = package.target(target.to_owned()).unwrap();
                     cmake_target.link();
                     for dir in cmake_target.include_directories {
