@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # cxx-kde-frameworks
 
 Extends [cxx-qt](https://github.com/KDAB/cxx-qt) by adding bindings for KDE Frameworks.

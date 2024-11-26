@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
+
 use std::path::PathBuf;
 
 use cmake_package::find_package;
