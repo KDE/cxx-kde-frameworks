@@ -50,3 +50,27 @@ pub fn i18ndp(domain: &str, singular: &str, plural: &str) -> QString {
 pub fn i18np(singular: &str, plural: &str) -> QString {
     return KLocalizedString::ki18np(singular.to_string(), plural.to_string()).to_qstring();
 }
+
+#[macro_export]
+macro_rules! i18n {
+    ($($arg:tt)*) => ({
+        $crate::ki18n::i18n(&format!($($arg)*))
+    });
+}
+
+#[macro_export]
+macro_rules! i18nc {
+    ($context:tt, $($arg:tt)*) => ({
+        $crate::ki18n::i18nc($context, &format!($($arg)*))
+    });
+}
+
+#[test]
+fn test_i18n_macros() {
+    let name = "World";
+    let result = i18nc!("Context", "Hello {name}");
+    assert_eq!(result.to_string(), "Hello World");
+
+    let result = i18n!("Hello {name}");
+    assert_eq!(result.to_string(), "Hello World");
+}
