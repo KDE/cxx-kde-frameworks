@@ -15,6 +15,7 @@ mod ffi {
 
     #[namespace = "rust::kf6"]
     unsafe extern "C++" {
+        #[doc(hidden)]
         #[rust_name = "initialize_engine"]
         fn initializeEngine(engine: Pin<&mut QQmlEngine>);
     }
@@ -22,9 +23,21 @@ mod ffi {
 use core::pin::Pin;
 use cxx_qt_lib::QQmlEngine;
 
+/// Simplifies integration of [KI18n](https://api.kde.org/frameworks/ki18n/html/index.html) framework in QML.
+///
+/// [C++ API](https://api.kde.org/frameworks/ki18n/html/classKLocalizedContext.html)
+///
+/// # Usage
+/// ```no_run
+/// let mut engine = QQmlApplicationEngine::new();
+/// if let Some(mut engine) = engine.as_mut() {
+///     KLocalizedContext::initialize_engine(engine.as_mut().as_qqmlengine());
+/// }
+/// ```
 pub use ffi::KLocalizedContext;
 
 impl KLocalizedContext {
+    /// Initializes KLocalizedContext inside QQmlEngine by setting it's root context to a new instance of KLocalizedContext.
     pub fn initialize_engine(engine: Pin<&mut QQmlEngine>) {
         ffi::initialize_engine(engine);
     }
