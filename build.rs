@@ -100,7 +100,7 @@ fn setup_linker(builder: CxxQtBuilder) -> CxxQtBuilder {
 
     for (name, targets) in LIBRARIES {
         match find_package(*name).find() {
-            Err(_) => panic!("Cannot find {name}"),
+            Err(err) => panic!("Cannot find {name}: {err:?}"),
             Ok(package) => {
                 for target in *targets {
                     let cmake_target = package.target(target.to_owned()).unwrap();
