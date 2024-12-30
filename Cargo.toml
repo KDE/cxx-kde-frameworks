@@ -9,10 +9,10 @@ links = "cxx-kde-frameworks"
 
 [dependencies]
 cxx = "1.0.121"
-cxx-qt = "0.7.0"
-cxx-qt-lib = { features = ["qt_full"], version = "0.7.0" }
-cxx-qt-lib-extras = { version = "0.7.0" }
+cxx-qt = {git = "https://github.com/redstrate/cxx-qt", branch = "work/josh/cmake-qt-modules"}
+cxx-qt-lib = { features = ["qt_full"], git = "https://github.com/redstrate/cxx-qt", branch = "work/josh/cmake-qt-modules" }
+cxx-qt-lib-extras = { git = "https://github.com/redstrate/cxx-qt", branch = "work/josh/cmake-qt-modules" }
 
 [build-dependencies]
 cmake-package = "0.1.3"
-cxx-qt-build = { features = ["link_qt_object_files"], version = "0.7.0" }
+cxx-qt-build = { git = "https://github.com/redstrate/cxx-qt", branch = "work/josh/cmake-qt-modules", features = ["link_qt_object_files"] }
