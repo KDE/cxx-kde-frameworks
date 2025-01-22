@@ -108,9 +108,12 @@ use cxx::UniquePtr;
 use cxx_qt_lib::QString;
 use cxx_qt_lib::QUrl;
 use cxx_qt_lib_extras::QCommandLineParser;
-pub use ffi::KAboutData;
 
 use super::License;
+
+/// This class is used to store information about a program or plugin.
+/// [C++ API](https://api.kde.org/frameworks/kcoreaddons/html/classKAboutData.html)
+pub use ffi::KAboutData;
 
 impl KAboutData {
     pub fn from(
