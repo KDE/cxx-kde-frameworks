@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: MPL-2.0
 
 use cxx::{type_id, ExternType};
-use std::mem::MaybeUninit;
 use cxx_qt_lib::QString;
+use std::mem::MaybeUninit;
 
 #[cxx_qt::bridge()]
 mod ffi {
@@ -130,6 +130,8 @@ pub use ffi::KFormatBinarySizeUnits;
 pub use ffi::KFormatBinaryUnitDialect;
 pub use ffi::KFormatUnitPrefix;
 
+/// Class for formatting numbers and datetimes.
+/// [C++ API](https://api.kde.org/frameworks/kcoreaddons/html/classKFormat.html)
 #[repr(C)]
 pub struct KFormat {
     _cspec: MaybeUninit<usize>,
