@@ -1,3 +1,10 @@
+/**
+ * SPDX-FileCopyrightText: (C) 2020 Carl Schwan <carl@carlschwan.eu>
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ */
+
+
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts

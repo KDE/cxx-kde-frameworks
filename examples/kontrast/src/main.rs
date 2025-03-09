@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 use cxx_kde_frameworks::kcoreaddons::{KAboutData, KAuthor, KCredit, KTranslator, License};
 use cxx_kde_frameworks::kcrash::KCrash;
 use cxx_kde_frameworks::ki18n::{i18nc, KLocalizedContext, KLocalizedString};

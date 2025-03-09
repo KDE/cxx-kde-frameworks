@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+
 #[derive(Default)]
 pub struct KontrastStruct {
     text_color: QColor,
