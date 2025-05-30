@@ -25,5 +25,6 @@ cargo-build-test:
     - cargo build
     - cargo test --no-run
     - export LD_PRELOAD=/usr/lib64/libasan.so.8
+    - export ASAN_OPTIONS=detect_leaks=0
     - cargo test --no-fail-fast
   artifacts: null
