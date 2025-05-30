@@ -12,9 +12,9 @@ include:
 cargo-build-test:
   extends: .ci_linux_base
   stage: build
-  image: invent-registry.kde.org/sysadmin/ci-images/suse-qt68:latest
+  image: invent-registry.kde.org/sysadmin/ci-images/suse-qt69:latest
   variables:
-    KDECI_PLATFORM_PATH: suse-qt6.8
+    KDECI_PLATFORM_PATH: suse-qt6.9
   tags:
     - Linux
   script:
