@@ -7,9 +7,6 @@ version = "0.1.0"
 edition = "2021"
 links = "cxx-kde-frameworks"
 
-[lib]
-doctest = false
-
 [dependencies]
 cxx = "1.0.121"
 cxx-qt = "0.7.0"
