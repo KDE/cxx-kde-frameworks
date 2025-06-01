@@ -3,13 +3,14 @@
 
 #![doc = include_str!("../README.md")]
 
-/// KCoreAddons provides classes built on top of QtCore to perform various tasks
-/// [C++ API](https://api.kde.org/frameworks/kcoreaddons/html/namespaceKCoreAddons.html)
+/// KCoreAddons provides classes built on top of QtCore to perform various tasks.
+///
+/// [C++ API documentation](https://api-staging.kde.org/kcoreaddons-module.html)
 pub mod kcoreaddons;
 
 /// KCrash provides support for intercepting and handling application crashes.
 ///
-/// [C++ API](https://api-staging.kde.org/kcrash-module.html)
+/// [C++ API documentation](https://api-staging.kde.org/kcrash-module.html)
 pub mod kcrash;
 
 /// KI18n provides functionality for internationalizing user interface text in applications, based on the GNU Gettext translation system.
