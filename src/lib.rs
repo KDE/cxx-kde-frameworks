@@ -20,7 +20,8 @@ pub mod kcrash;
 pub mod ki18n;
 
 /// This library contains classes to improve the handling of icons in applications using the KDE Frameworks.
-/// [C++ API](https://api.kde.org/frameworks/kiconthemes/html/index.html)
+///
+/// [C++ API documentation](https://api-staging.kde.org/kiconthemes-module.html)
 pub mod kiconthemes;
 
 /// KConfigWidgets provides easy-to-use classes to create configuration dialogs, as well as a set of widgets which uses KConfig to store their settings.
