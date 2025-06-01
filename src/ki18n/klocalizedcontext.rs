@@ -29,6 +29,9 @@ use cxx_qt_lib::QQmlEngine;
 ///
 /// # Usage
 /// ```no_run
+/// use cxx_qt_lib::QQmlApplicationEngine;
+/// use cxx_kde_frameworks::ki18n::KLocalizedContext;
+///
 /// let mut engine = QQmlApplicationEngine::new();
 /// if let Some(mut engine) = engine.as_mut() {
 ///     KLocalizedContext::initialize_engine(engine.as_mut().as_qqmlengine());
