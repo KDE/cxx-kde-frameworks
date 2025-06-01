@@ -8,7 +8,8 @@
 pub mod kcoreaddons;
 
 /// KCrash provides support for intercepting and handling application crashes.
-/// [C++ API](https://api.kde.org/frameworks/kcrash/html/namespaceKCrash.html)
+///
+/// [C++ API](https://api-staging.kde.org/kcrash-module.html)
 pub mod kcrash;
 
 /// KI18n provides functionality for internationalizing user interface text in applications, based on the GNU Gettext translation system.
