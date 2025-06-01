@@ -27,4 +27,10 @@ cargo-build-test:
     - export LD_PRELOAD=/usr/lib64/libasan.so.8
     - export LSAN_OPTIONS=suppressions=lsan.supp
     - cargo test --no-fail-fast
-  artifacts: null
+    - unset LD_PRELOAD
+    - cargo doc
+  artifacts:
+    expire_in: 7 days
+    when: always
+    paths:
+      - target/doc
