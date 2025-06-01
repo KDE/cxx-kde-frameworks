@@ -7,6 +7,9 @@ mod ffi {
     unsafe extern "C++" {
         include!("cxx-kde-frameworks/kstylemanager.h");
 
+        /// Enforces the style configured by the user with fallback to the Breeze style.
+        ///
+        /// [C++ API documentation](https://api-staging.kde.org/kstylemanager.html#initStyle)
         #[rust_name = "init_style"]
         fn initStyle();
     }
