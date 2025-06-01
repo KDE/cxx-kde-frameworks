@@ -79,7 +79,7 @@ mod ffi {
 
         /// Finalizes and creates a translated [QString](cxx_qt_lib::QString).
         ///
-        /// C++ counterpart: [KLocalizedString::toString()](https://api.kde.org/frameworks/ki18n/html/classKLocalizedString.html#a2ce655136d85997c70d734fb1587bd9b).
+        /// C++ counterpart: [KLocalizedString::toString()](https://api-staging.kde.org/klocalizedstring.html#toString).
         #[rust_name = "to_qstring"]
         fn toString(self: &KLocalizedString) -> QString;
     }
@@ -90,7 +90,7 @@ use cxx_qt_lib::QByteArray;
 
 /// Class for producing and handling localized messages.
 ///
-/// [C++ API](https://api.kde.org/frameworks/ki18n/html/classKLocalizedString.html)
+/// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html)
 pub use ffi::KLocalizedString;
 
 impl KLocalizedString {
