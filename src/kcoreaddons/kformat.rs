@@ -8,6 +8,9 @@ use std::mem::MaybeUninit;
 #[cxx_qt::bridge()]
 mod ffi {
 
+    /// This enum chooses what dialect is used for binary units.
+    ///
+    /// [C++ API documentation](https://api-staging.kde.org/kformat.html#BinaryUnitDialect-enum)
     #[namespace = "rust::kf6"]
     #[repr(i32)]
     pub enum KFormatBinaryUnitDialect {
@@ -17,6 +20,9 @@ mod ffi {
         MetricBinaryDialect = 2,
     }
 
+    /// This enum chooses what dialect is used for binary units.
+    ///
+    /// [C++ API documentation](https://api-staging.kde.org/kformat.html#BinarySizeUnits-enum)
     #[namespace = "rust::kf6"]
     #[repr(i32)]
     pub enum KFormatBinarySizeUnits {
@@ -32,6 +38,9 @@ mod ffi {
         UnitYottaByte,
     }
 
+    /// These prefixes are used in KDE by the formatValue() function.
+    ///
+    /// [C++ API documentation](https://api-staging.kde.org/kformat.html#UnitPrefix-enum)
     #[namespace = "rust::kf6"]
     #[repr(i32)]
     enum KFormatUnitPrefix {
@@ -78,6 +87,9 @@ mod ffi {
         // include!("cxx-qt-lib/qdate.h");
         // type QDate = cxx_qt_lib::QDate;
 
+        /// Converts size from bytes to the appropriate string representation using the binary unit dialect dialect and the specific units units.
+        ///
+        /// [C++ API documentation](https://api-staging.kde.org/kformat.html#formatByteSize)
         #[rust_name = "format_byte_size"]
         fn formatByteSize(
             self: &KFormat,
@@ -92,7 +104,9 @@ mod ffi {
         // #[rust_name = "format_relative_date"]
         // fn formatRelativeDate(self: &KFormat, date: &QDate, format: QLocaleFormatType) -> QString;
 
-        // QString formatValue(double value, const QString &unit, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
+        /// Converts value to the appropriate string representation.
+        ///
+        /// [C++ API documentation](https://api-staging.kde.org/kformat.html#formatValue)
         #[rust_name = "format_value"]
         fn formatValue(
             self: &KFormat,
@@ -131,7 +145,8 @@ pub use ffi::KFormatBinaryUnitDialect;
 pub use ffi::KFormatUnitPrefix;
 
 /// Class for formatting numbers and datetimes.
-/// [C++ API](https://api.kde.org/frameworks/kcoreaddons/html/classKFormat.html)
+///
+/// [C++ API documentation](https://api-staging.kde.org/kformat.html)
 #[repr(C)]
 pub struct KFormat {
     _cspec: MaybeUninit<usize>,
@@ -150,10 +165,17 @@ impl Drop for KFormat {
 }
 
 impl KFormat {
+
+    /// Given a number of milliseconds, converts that to a spell-out string containing the localized equivalent.
+    ///
+    /// [C++ API documentation](https://api-staging.kde.org/kformat.html#formatSpelloutDuration)
     pub fn format_spellout_duration(&self, msecs: u64) -> QString {
         ffi::format_spellout_duration(self, msecs)
     }
 
+    /// Given a number of milliseconds, converts that to a string containing the localized equivalent to the requested decimal places.
+    ///
+    /// [C++ API documentation](https://api-staging.kde.org/kformat.html#formatDecimalDuration)
     pub fn format_decimal_duration(&self, msecs: u64, decimal_places: i32) -> QString {
         ffi::format_decimal_duration(self, msecs, decimal_places)
     }
