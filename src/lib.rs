@@ -15,7 +15,8 @@ pub mod kcrash;
 
 /// KI18n provides functionality for internationalizing user interface text in applications, based on the GNU Gettext translation system.
 /// It provides functionality to use translated strings from the Rust and QML interfaces.
-/// [C++ API](https://api.kde.org/frameworks/ki18n/html/index.html)
+///
+/// [C++ API documentation](https://api-staging.kde.org/ki18n-module.html)
 pub mod ki18n;
 
 /// This library contains classes to improve the handling of icons in applications using the KDE Frameworks.
