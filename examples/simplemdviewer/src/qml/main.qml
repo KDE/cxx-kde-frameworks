@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-
 import QtQuick
 import QtQuick.Controls as Controls
 import QtQuick.Layouts
@@ -67,10 +66,9 @@ Kirigami.ApplicationWindow {
 
                 }
 
-                Text {
+                Controls.Label {
                     id: formattedText
 
-                    color: "white"
                     textFormat: Text.RichText
                     wrapMode: Text.WordWrap
                     Layout.fillWidth: true
