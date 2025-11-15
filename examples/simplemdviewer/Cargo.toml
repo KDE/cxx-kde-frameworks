@@ -7,10 +7,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-cxx = "1.0.122"
-cxx-qt = "0.7.0"
-cxx-qt-lib = { version = "0.7.0",  features = ["qt_full"] }
-markdown = "=1.0.0-alpha.17"
+cxx = "1.0.188"
+cxx-qt = "0.7.3"
+cxx-qt-lib = { version = "0.7.3",  features = ["qt_full"] }
+markdown = "1.0.0"
 
 [build-dependencies]
-cxx-qt-build = "0.7.0"
+cxx-qt-build = "0.7.3"

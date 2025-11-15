@@ -9,7 +9,7 @@ fn main() {
         .qml_module(QmlModule {
             uri: "org.kde.simplemdviewer",
             rust_files: &["src/bridge.rs"],
-            qml_files: &["src/qml/main.qml"],
+            qml_files: &["src/qml/Main.qml"],
             ..Default::default()
         })
         .build();
