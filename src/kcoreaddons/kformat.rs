@@ -197,6 +197,8 @@ mod tests {
 
     #[test]
     fn test_add() {
+        std::env::set_var("LC_NUMERIC", "en_US.UTF-8");
+
         let fm = KFormat::default();
 
         assert_eq!(
