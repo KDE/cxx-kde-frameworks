@@ -8,11 +8,11 @@ edition = "2021"
 links = "cxx-kde-frameworks"
 
 [dependencies]
-cxx = "1.0.121"
-cxx-qt = "0.7.0"
-cxx-qt-lib = { features = ["qt_full"], version = "0.7.0" }
-cxx-qt-lib-extras = { version = "0.7.0" }
+cxx = "1.0.188"
+cxx-qt = "0.7.3"
+cxx-qt-lib = { features = ["qt_full"], version = "0.7.3" }
+cxx-qt-lib-extras = { version = "0.7.3" }
 
 [build-dependencies]
-cmake-package = "0.1.5"
-cxx-qt-build = { features = ["link_qt_object_files"], version = "0.7.0" }
+cmake-package = "0.1.9"
+cxx-qt-build = { features = ["link_qt_object_files"], version = "0.7.3" }
