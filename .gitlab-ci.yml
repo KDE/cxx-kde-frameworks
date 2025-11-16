@@ -12,11 +12,12 @@ include:
 cargo-build-test:
   extends: .ci_linux_base
   stage: build
-  image: invent-registry.kde.org/sysadmin/ci-images/suse-qt69:latest
-  variables:
-    KDECI_PLATFORM_PATH: suse-qt6.9
+  image: storage.kde.org/vm-images/suse-qt610
   tags:
-    - Linux
+    - VM
+    - amd64
+  variables:
+    KDECI_PLATFORM_PATH: suse-qt6.10
   script:
     - git config --global --add safe.directory $CI_PROJECT_DIR
     - python3 -u ci-utilities/run-ci-build.py --project $CI_PROJECT_NAME --branch $CI_COMMIT_REF_NAME --platform Linux/Qt6/Shared --only-setup-environment
