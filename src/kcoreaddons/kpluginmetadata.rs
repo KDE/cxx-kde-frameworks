@@ -16,19 +16,19 @@ mod ffi {
 
         /// Returns whether this object holds valid information about a plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#isValid)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#isValid)
         #[rust_name = "is_valid"]
         fn isValid(self: &KPluginMetaData) -> bool;
 
         /// Returns whether this object should be hidden.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#isHidden)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#isHidden)
         #[rust_name = "is_hidden"]
         fn isHidden(self: &KPluginMetaData) -> bool;
 
         /// Returns the path to the plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#fileName)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#fileName)
         #[rust_name = "file_name"]
         fn fileName(self: &KPluginMetaData) -> QString;
 
@@ -36,12 +36,12 @@ mod ffi {
 
         /// Returns the user visible name of the plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#name)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#name)
         fn name(self: &KPluginMetaData) -> QString;
 
         /// Returns a short description of the plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#description)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#description)
         fn description(self: &KPluginMetaData) -> QString;
 
         // QList<KAboutPerson> authors() const;
@@ -52,75 +52,75 @@ mod ffi {
 
         /// Returns the categories of this plugin (e.g. "playlist/skin").
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#category)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#category)
         fn category(self: &KPluginMetaData) -> QString;
 
         /// Returns the icon name for this plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#iconName)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#iconName)
         #[rust_name = "icon_name"]
         fn iconName(self: &KPluginMetaData) -> QString;
 
         /// Returns the short license identifier (e.g. LGPL).
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#license)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#license)
         fn license(self: &KPluginMetaData) -> QString;
 
         /// Returns the text of the license, equivalent to KAboutLicense::byKeyword(license()).text()
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#licenseText)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#licenseText)
         #[rust_name = "license_text"]
         fn licenseText(self: &KPluginMetaData) -> QString;
 
         /// Returns a short copyright statement.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#copyrightText)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#copyrightText)
         #[rust_name = "copyright_text"]
         fn copyrightText(self: &KPluginMetaData) -> QString;
 
         /// Returns the unique identifier within the namespace of the plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#pluginId)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#pluginId)
         #[rust_name = "plugin_id"]
         fn pluginId(self: &KPluginMetaData) -> QString;
 
         /// Returns the version of the plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#version)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#version)
         fn version(self: &KPluginMetaData) -> QString;
 
         /// Returns the website of the plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#website)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#website)
         fn website(self: &KPluginMetaData) -> QString;
 
         /// Returns the website where people can report a bug found in this plugin.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#bugReportUrl)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#bugReportUrl)
         #[rust_name = "bug_report_url"]
         fn bugReportUrl(self: &KPluginMetaData) -> QString;
 
         /// Returns a list of MIME types this plugin can handle (e.g. "application/pdf", "image/png", etc.).
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#mimeTypes)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#mimeTypes)
         #[rust_name = "mime_types"]
         fn mimeTypes(self: &KPluginMetaData) -> QStringList;
 
         /// Returns true if this plugin can handle the given mimetype This is more accurate than mimeTypes().contains(mimeType) because it also takes MIME type inheritance into account.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#supportsMimeType)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#supportsMimeType)
         #[rust_name = "supports_mime_type"]
         fn supportsMimeType(self: &KPluginMetaData, mime_type: &QString) -> bool;
 
         /// Returns A string list of formfactors this plugin is useful for, e.g. desktop, handset or mediacenter. The keys for this are not formally defined, though the above-mentioned values should be used when applicable.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#formFactors)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#formFactors)
         #[rust_name = "form_factors"]
         fn formFactors(self: &KPluginMetaData) -> QStringList;
 
         /// Returns whether the plugin should be enabled by default. This is only a recommendation, applications can ignore this value if they want to.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#isEnabledByDefault)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#isEnabledByDefault)
         #[rust_name = "is_enabled_by_default"]
         fn isEnabledByDefault(self: &KPluginMetaData) -> bool;
 
@@ -134,7 +134,7 @@ mod ffi {
         // TODO make key QStringView
         /// Returns the string value for key from the metadata or defaultValue if the key does not exist
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#value)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#value)
         fn value(self: &KPluginMetaData, key: &QString, default_value: &QString) -> QString;
 
         // bool value(QStringView key, bool defaultValue) const;
@@ -145,7 +145,7 @@ mod ffi {
 
         /// Returns true if the instance represents a static plugin
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html#isStaticPlugin)
+        /// [C++ API documentation](https://api.kde.org/kpluginmetadata.html#isStaticPlugin)
         #[rust_name = "is_static_plugin"]
         fn isStaticPlugin(self: &KPluginMetaData) -> bool;
     }
@@ -169,7 +169,7 @@ use std::mem::MaybeUninit;
 
 /// This class allows easily accessing some standardized values from the JSON metadata that can be embedded into Qt plugins.
 ///
-/// [C++ API documentation](https://api-staging.kde.org/kpluginmetadata.html)
+/// [C++ API documentation](https://api.kde.org/kpluginmetadata.html)
 #[repr(C)]
 pub struct KPluginMetaData {
     _cspec: MaybeUninit<usize>,

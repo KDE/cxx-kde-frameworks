@@ -9,7 +9,7 @@ mod ffi {
 
         /// Enforces the style configured by the user with fallback to the Breeze style.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kstylemanager.html#initStyle)
+        /// [C++ API documentation](https://api.kde.org/kstylemanager.html#initStyle)
         #[rust_name = "init_style"]
         fn initStyle();
     }

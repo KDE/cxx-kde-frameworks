@@ -23,29 +23,29 @@ mod ffi {
 
         /// Returns the person's name
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kaboutperson.html#name)
+        /// [C++ API documentation](https://api.kde.org/kaboutperson.html#name)
         fn name(self: &KAboutPerson) -> QString;
 
         /// Returns the person's task
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kaboutperson.html#task)
+        /// [C++ API documentation](https://api.kde.org/kaboutperson.html#task)
         fn task(self: &KAboutPerson) -> QString;
 
         /// Returns the person's email address
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kaboutperson.html#emailAddress)
+        /// [C++ API documentation](https://api.kde.org/kaboutperson.html#emailAddress)
         #[rust_name = "email_address"]
         fn emailAddress(self: &KAboutPerson) -> QString;
 
         /// Returns the person's home page
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kaboutperson.html#webAddress)
+        /// [C++ API documentation](https://api.kde.org/kaboutperson.html#webAddress)
         #[rust_name = "web_address"]
         fn webAddress(self: &KAboutPerson) -> QString;
 
         /// Returns an URL pointing to the user's avatar
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kaboutperson.html#avatarUrl)
+        /// [C++ API documentation](https://api.kde.org/kaboutperson.html#avatarUrl)
         #[rust_name = "avatar_url"]
         fn avatarUrl(self: &KAboutPerson) -> QUrl;
 
@@ -54,19 +54,19 @@ mod ffi {
 
         /// Add an author.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kaboutdata.html#addAuthor)
+        /// [C++ API documentation](https://api.kde.org/kaboutdata.html#addAuthor)
         #[rust_name = "add_author"]
         fn addAuthor(self: Pin<&mut KAboutData>, author: &KAboutPerson) -> Pin<&mut KAboutData>;
 
         /// Add a person that deserves credit.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kaboutdata.html#addCredit)
+        /// [C++ API documentation](https://api.kde.org/kaboutdata.html#addCredit)
         #[rust_name = "add_credit"]
         fn addCredit(self: Pin<&mut KAboutData>, author: &KAboutPerson) -> Pin<&mut KAboutData>;
 
         /// Sets the name(s) of the translator(s) of the GUI.
         ///
-        /// [C++ API documentation](https://api-staging.kde.org/kaboutdata.html#setTranslator)
+        /// [C++ API documentation](https://api.kde.org/kaboutdata.html#setTranslator)
         #[rust_name = "set_translator"]
         fn setTranslator(self: Pin<&mut KAboutData>, name: &QString, email_address: &QString) -> Pin<&mut KAboutData>;
 
@@ -122,7 +122,7 @@ mod ffi {
 
 /// This class is used to store information about a person or developer.
 ///
-/// [C++ API documentation](https://api-staging.kde.org/kaboutperson.html)
+/// [C++ API documentation](https://api.kde.org/kaboutperson.html)
 #[repr(C)]
 pub struct KAboutPerson {
     _cspec: MaybeUninit<usize>,
@@ -139,7 +139,7 @@ use super::License;
 
 /// This class is used to store information about a program or plugin.
 ///
-/// [C++ API documentation](https://api-staging.kde.org/kaboutdata.html)
+/// [C++ API documentation](https://api.kde.org/kaboutdata.html)
 pub use ffi::KAboutData;
 
 impl KAboutData {
@@ -162,21 +162,21 @@ impl KAboutData {
 
     /// Sets the application data for this application.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/kaboutdata.html#setApplicationData)
+    /// [C++ API documentation](https://api.kde.org/kaboutdata.html#setApplicationData)
     pub fn set_application_data(about_data: &KAboutData) {
         ffi::set_application_data(about_data);
     }
 
     /// Configures the parser command line parser to provide an authors entry with information about the developers of the application and an entry specifying the license.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/kaboutdata.html#setupCommandLine)
+    /// [C++ API documentation](https://api.kde.org/kaboutdata.html#setupCommandLine)
     pub fn setup_command_line(self: Pin<&mut KAboutData>, parser: &mut QCommandLineParser) -> bool {
         unsafe { self.setup_command_line_raw(&mut *parser) }
     }
 
     /// Reads the processed parser and sees if any of the arguments are the ones set up from setupCommandLine().
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/kaboutdata.html#processCommandLine)
+    /// [C++ API documentation](https://api.kde.org/kaboutdata.html#processCommandLine)
     pub fn process_command_line(self: Pin<&mut KAboutData>, parser: &mut QCommandLineParser) {
         unsafe {
             self.process_command_line_raw(&mut *parser);

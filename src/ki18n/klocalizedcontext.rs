@@ -25,7 +25,7 @@ use cxx_qt_lib::QQmlEngine;
 
 /// Simplifies integration of KI18n framework in QML.
 ///
-/// [C++ API documentation](https://api-staging.kde.org/klocalizedcontext.html)
+/// [C++ API documentation](https://api.kde.org/klocalizedcontext.html)
 ///
 /// # Usage
 /// ```no_run

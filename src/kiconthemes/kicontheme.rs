@@ -17,13 +17,13 @@ mod ffi {
 
 /// Class to use/access icon themes in KDE.
 ///
-/// [C++ API documentation](https://api-staging.kde.org/kicontheme.html)
+/// [C++ API documentation](https://api.kde.org/kicontheme.html)
 pub use ffi::KIconTheme;
 
 impl ffi::KIconTheme {
     /// Enforces the Breeze icon theme (including our KIconEngine for re-coloring).
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/kicontheme.html#initTheme)
+    /// [C++ API documentation](https://api.kde.org/kicontheme.html#initTheme)
     pub fn init_theme() {
         ffi::init_icons();
     }

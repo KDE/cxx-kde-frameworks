@@ -14,14 +14,14 @@ mod ffi {
 
 /// Functions to handle crashes
 ///
-/// [C++ API documentation](https://api-staging.kde.org/kcrash.html)
+/// [C++ API documentation](https://api.kde.org/kcrash.html)
 pub struct KCrash {}
 
 impl KCrash {
 
     /// Initialize KCrash.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/kcrash.html#initialize)
+    /// [C++ API documentation](https://api.kde.org/kcrash.html#initialize)
     pub fn initialize() {
         ffi::initialize_kcrash();
     }

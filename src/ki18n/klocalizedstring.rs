@@ -78,7 +78,7 @@ mod ffi {
 
         /// Finalizes and creates a translated [QString](cxx_qt_lib::QString).
         ///
-        /// C++ counterpart: [KLocalizedString::toString()](https://api-staging.kde.org/klocalizedstring.html#toString).
+        /// C++ counterpart: [KLocalizedString::toString()](https://api.kde.org/klocalizedstring.html#toString).
         #[rust_name = "to_qstring"]
         fn toString(self: &KLocalizedString) -> QString;
     }
@@ -89,48 +89,48 @@ use cxx_qt_lib::QByteArray;
 
 /// Class for producing and handling localized messages.
 ///
-/// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html)
+/// [C++ API documentation](https://api.kde.org/klocalizedstring.html)
 pub use ffi::KLocalizedString;
 
 impl KLocalizedString {
     /// Set the given domain as application's main domain.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#setApplicationDomain)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#setApplicationDomain)
     pub fn set_application_domain(domain: &QByteArray) {
         ffi::set_application_domain(domain);
     }
 
     /// Get the application's main translation domain.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#applicationDomain)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#applicationDomain)
     pub fn application_domain() -> QByteArray {
         ffi::application_domain()
     }
 
     /// Create non-finalized translated string.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#ki18n)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#ki18n)
     pub fn ki18n(text: String) -> UniquePtr<Self> {
         ffi::ki18n(text)
     }
 
     /// Create non-finalized translated string with context.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#ki18nc)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#ki18nc)
     pub fn ki18nc(context: String, text: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18nc(context, text)
     }
 
     /// Create non-finalized translated string with plural.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#ki18np)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#ki18np)
     pub fn ki18np(singular: String, plural: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18np(singular, plural)
     }
 
     /// Create non-finalized translated string with context and plural.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#ki18ncp)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#ki18ncp)
     pub fn ki18ncp(
         context: String,
         singular: String,
@@ -141,21 +141,21 @@ impl KLocalizedString {
 
     /// Create non-finalized translated string from domain.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#ki18nd)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#ki18nd)
     pub fn ki18nd(domain: String, text: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18nd(domain, text)
     }
 
     /// Create non-finalized translated string from domain with context.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#ki18ndc)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#ki18ndc)
     pub fn ki18ndc(domain: String, context: String, text: String) -> UniquePtr<KLocalizedString> {
         ffi::ki18ndc(domain, context, text)
     }
 
     /// Create non-finalized translated string from domain with plural.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#ki18ndp)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#ki18ndp)
     pub fn ki18ndp(
         domain: String,
         singular: String,
@@ -166,7 +166,7 @@ impl KLocalizedString {
 
     /// Create non-finalized translated string from domain with context and plural.
     ///
-    /// [C++ API documentation](https://api-staging.kde.org/klocalizedstring.html#ki18ndcp)
+    /// [C++ API documentation](https://api.kde.org/klocalizedstring.html#ki18ndcp)
     pub fn ki18ndcp(
         domain: String,
         context: String,
