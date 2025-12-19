@@ -4,6 +4,7 @@
 use cxx_kde_frameworks::kcoreaddons::{KAboutData, KAboutPerson, License};
 use cxx_kde_frameworks::kcrash::KCrash;
 use cxx_kde_frameworks::ki18n::{i18nc, KLocalizedContext, KLocalizedString};
+use cxx_qt::casting::Upcast;
 use cxx_qt_lib::{QByteArray, QGuiApplication, QQmlApplicationEngine, QString, QUrl};
 
 mod dbus;
@@ -58,7 +59,7 @@ async fn main() {
     KAboutData::set_application_data(&about_data);
 
     if let Some(mut engine) = engine.as_mut() {
-        KLocalizedContext::initialize_engine(engine.as_mut().as_qqmlengine());
+        KLocalizedContext::initialize_engine(engine.as_mut().upcast_pin());
         engine.load(&QUrl::from("qrc:/qt/qml/org/kde/kontrast/src/qml/Main.qml"));
     }
 

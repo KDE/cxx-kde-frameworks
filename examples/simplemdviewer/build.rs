@@ -4,13 +4,10 @@
 use cxx_qt_build::{CxxQtBuilder, QmlModule};
 
 fn main() {
-    CxxQtBuilder::new()
-        .qt_module("Network")
-        .qml_module(QmlModule {
-            uri: "org.kde.simplemdviewer",
-            rust_files: &["src/bridge.rs"],
-            qml_files: &["src/qml/Main.qml"],
-            ..Default::default()
-        })
-        .build();
+    CxxQtBuilder::new_qml_module(
+        QmlModule::new("org.kde.simplemdviewer").qml_file("src/qml/Main.qml"),
+    )
+    .files(["src/bridge.rs"])
+    .qt_module("Network")
+    .build();
 }

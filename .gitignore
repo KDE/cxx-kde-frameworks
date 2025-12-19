@@ -3,5 +3,6 @@
 
 **/target/
 **/.ccls-cache/
+**/.qmlls.ini
 
 Cargo.lock
