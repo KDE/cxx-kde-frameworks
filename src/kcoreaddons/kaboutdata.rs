@@ -14,7 +14,7 @@ mod ffi {
         include!("cxx-qt-lib/qurl.h");
         type QUrl = cxx_qt_lib::QUrl;
 
-        include!("cxx-qt-lib-extras/qcommandlineparser.h");
+        include!("cxx-qt-lib-extras/core/qcommandlineparser.h");
         type QCommandLineParser = cxx_qt_lib_extras::QCommandLineParser;
 
         include!("cxx-kde-frameworks/kaboutdata.h");

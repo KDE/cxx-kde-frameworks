@@ -19,13 +19,10 @@ const LIBRARIES: &[(&str, &[&str])] = &[
 fn main() {
     write_headers();
 
-    let interface = cxx_qt_build::Interface::default()
-        .export_include_prefixes([])
-        .export_include_directory(header_dir(), "cxx-kde-frameworks")
-        .reexport_dependency("cxx-qt-lib");
-
-    let mut builder = CxxQtBuilder::library(interface);
-    builder = setup_linker(builder);
+    let mut builder = CxxQtBuilder::new()
+        .include_prefix("private")
+        .crate_include_root(Some("include/".to_owned()))
+        .include_dir(header_dir());
 
     let rust_files = vec![
         "kcoreaddons/kaboutdata",
@@ -39,10 +36,6 @@ fn main() {
         "kcmutils/kquickconfigmodule",
     ];
 
-    for source in &rust_files {
-        builder = builder.file(format!("src/{source}.rs"))
-    }
-
     let cpp_files = vec![
         "kcoreaddons/kaboutdata",
         "kcoreaddons/kformat",
@@ -54,14 +47,18 @@ fn main() {
         "kcmutils/kquickconfigmodule",
     ];
 
-    builder = builder.cc_builder(move |cc| {
-        for file in &cpp_files {
-            cc.file(format!("src/{file}.cpp"));
-            println!("cargo:rerun-if-changed=src/{file}.cpp");
-        }
-    });
+    for file in &rust_files {
+        builder = builder.file(format!("src/{file}.rs"))
+    }
 
-    builder.build();
+    for file in &cpp_files {
+        builder = builder.cpp_file(format!("src/{file}.cpp"))
+    }
+
+    builder = link_libraries(builder);
+
+    let interface = builder.build();
+    interface.reexport_dependency("cxx-qt-lib").export();
 }
 
 fn write_headers() {
@@ -101,7 +98,7 @@ fn header_dir() -> PathBuf {
         .join("cxx-kde-frameworks")
 }
 
-fn setup_linker(builder: CxxQtBuilder) -> CxxQtBuilder {
+fn link_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
     let mut directories = Vec::new();
 
     for (name, targets) in LIBRARIES {
@@ -119,9 +116,11 @@ fn setup_linker(builder: CxxQtBuilder) -> CxxQtBuilder {
         }
     }
 
-    builder.cc_builder(move |cc| {
-        for dir in &directories {
-            cc.include(dir);
-        }
-    })
+    unsafe {
+        builder.cc_builder(move |cc| {
+            for dir in &directories {
+                cc.include(dir);
+            }
+        })
+    }
 }

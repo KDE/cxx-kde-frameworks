@@ -10,12 +10,11 @@ mod ffi {
 
         include!("cxx-qt-lib/qstring.h");
         type QString = cxx_qt_lib::QString;
+    }
 
+    unsafe extern "C++" {
         include!("cxx-kde-frameworks/klocalizedstring.h");
-
-        #[qobject]
         type KLocalizedString;
-
     }
 
     #[namespace = "rust::kf6"]
