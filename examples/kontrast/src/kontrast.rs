@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-
 #[derive(Default)]
 pub struct KontrastStruct {
     text_color: QColor,
@@ -137,7 +136,6 @@ use std::pin::Pin;
 use cxx_kde_frameworks::ki18n::i18n;
 use cxx_qt::Threading;
 use cxx_qt_lib::{QColor, QString};
-use rand::{thread_rng, Rng};
 
 use crate::dbus;
 
@@ -287,8 +285,7 @@ impl ffi::Kontrast {
     }
 
     fn random(mut self: Pin<&mut Self>) {
-        let mut rng = thread_rng();
-        let mut col = || rng.gen_range(0..256);
+        let col = || rand::random_range(0..256);
 
         loop {
             let text_color = QColor::from_rgb(col(), col(), col());
