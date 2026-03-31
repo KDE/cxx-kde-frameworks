@@ -21,9 +21,8 @@ mod ffi {
 use core::pin::Pin;
 use cxx_qt_lib::QQmlEngine;
 
-///  Use KI18n framework in QML.
 ///
-/// [C++ API documentation](https://api.kde.org/klocalizedcontext.html)
+/// [C++ API documentation](https://api.kde.org/klocalizedqmlcontext.html#setupLocalizedContext)
 ///
 /// # Usage
 /// ```no_run
