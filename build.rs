@@ -9,7 +9,7 @@ use cxx_qt_build::CxxQtBuilder;
 // list of (LibraryName, [LibraryTargets])
 const LIBRARIES: &[(&str, &[&str])] = &[
     ("KF6CoreAddons", &["KF6::CoreAddons"]),
-    ("KF6I18n", &["KF6::I18n"]),
+    ("KF6I18n", &["KF6::I18n", "KF6::I18nQml"]),
     ("KF6Crash", &["KF6::Crash"]),
     ("KF6IconThemes", &["KF6::IconThemes"]),
     ("KF6ConfigWidgets", &["KF6::ConfigWidgets"]),
@@ -28,7 +28,7 @@ fn main() {
         "kcoreaddons/kaboutdata",
         "kcoreaddons/kformat",
         "kcoreaddons/kpluginmetadata",
-        "ki18n/klocalizedcontext",
+        "ki18n/klocalization",
         "ki18n/klocalizedstring",
         "kcrash/kcrash",
         "kiconthemes/kicontheme",
@@ -40,7 +40,7 @@ fn main() {
         "kcoreaddons/kaboutdata",
         "kcoreaddons/kformat",
         "kcoreaddons/kpluginmetadata",
-        "ki18n/klocalizedcontext",
+        "ki18n/klocalization",
         "ki18n/klocalizedstring",
         "kcrash/kcrash",
         "kiconthemes/kicontheme",
