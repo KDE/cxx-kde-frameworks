@@ -35,6 +35,20 @@ mod ffi {
         Notify = 9,
         Normal = 1,
     }
+
+    #[namespace = "rust::cxxqtlib1"]
+    unsafe extern "C++" {
+        include!("cxx-qt-lib/common.h");
+
+        #[doc(hidden)]
+        #[rust_name = "kconfiggroup_init_default"]
+        fn construct() -> KConfigGroup;
+
+        #[doc(hidden)]
+        #[rust_name = "kconfiggroup_drop"]
+        fn drop(format: &mut KConfigGroup);
+    }
+
 }
 
 bitflags! {
@@ -56,6 +70,12 @@ pub use ffi::WriteConfigFlag;
 pub struct KConfigGroup {
     _cspec: MaybeUninit<usize>,
     _cspec2: MaybeUninit<usize>,
+}
+
+impl Drop for KConfigGroup {
+    fn drop(&mut self) {
+        ffi::kconfiggroup_drop(self);
+    }
 }
 
 // Safety:
