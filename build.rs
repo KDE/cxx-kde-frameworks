@@ -9,6 +9,7 @@ use cxx_qt_build::CxxQtBuilder;
 // list of (LibraryName, [LibraryTargets])
 const LIBRARIES: &[(&str, &[&str])] = &[
     ("KF6CoreAddons", &["KF6::CoreAddons"]),
+    ("KF6Config", &["KF6::ConfigCore"]),
     ("KF6I18n", &["KF6::I18n", "KF6::I18nQml"]),
     ("KF6Crash", &["KF6::Crash"]),
     ("KF6IconThemes", &["KF6::IconThemes"]),
@@ -34,6 +35,8 @@ fn main() {
         "kiconthemes/kicontheme",
         "kconfigwidgets/kstylemanager",
         "kcmutils/kquickconfigmodule",
+        "kconfig/kconfig",
+        "kconfig/kconfiggroup",
     ];
 
     let cpp_files = vec![
@@ -45,6 +48,8 @@ fn main() {
         "kcrash/kcrash",
         "kiconthemes/kicontheme",
         "kcmutils/kquickconfigmodule",
+        "kconfig/kconfig",
+        "kconfig/kconfiggroup",
     ];
 
     for file in &rust_files {
@@ -71,6 +76,7 @@ fn write_headers() {
     write_headers_in("kiconthemes");
     write_headers_in("kconfigwidgets");
     write_headers_in("kcmutils");
+    write_headers_in("kconfig");
 }
 
 fn write_headers_in(subfolder: &str) {
