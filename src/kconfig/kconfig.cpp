@@ -4,8 +4,8 @@
 #include "kconfig.h"
 
 namespace rust::kf6::kconfig {
-    std::unique_ptr<KConfig> from(QString file)
+    std::unique_ptr<KConfig> from(QString file, KConfig::OpenFlags mode)
     {
-        return std::make_unique<KConfig>(file);
+        return std::make_unique<KConfig>(file, mode);
     }
 }

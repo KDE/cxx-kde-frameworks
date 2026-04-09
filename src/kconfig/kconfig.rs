@@ -4,11 +4,14 @@
 use cxx::{UniquePtr};
 use cxx_qt_lib::QString;
 use crate::kconfig::{WriteConfigFlags};
+use cxx::{type_id, ExternType};
+use bitflags::bitflags;
 
 #[cxx_qt::bridge()]
 mod ffi {
 
     #[namespace = "rust::kf6::kconfig"]
+    #[derive(Debug)]
     #[repr(i32)]
     pub enum KConfigAccessMode {
         NoAccess = 0,
@@ -17,10 +20,24 @@ mod ffi {
     }
 
     #[namespace = "rust::kf6::kconfig"]
+    #[derive(Debug)]
+    #[repr(u32)]
+    enum OpenFlag {
+        IncludeGlobals = 1,
+        CascadeConfig = 2,
+
+        SimpleConfig = 0,
+        NoCascade = 1,
+        NoGlobals = 2,
+        FullConfig = 3,
+    }
+    #[namespace = "rust::kf6::kconfig"]
     unsafe extern "C++" {
-        fn from(file: QString) -> UniquePtr<KConfig>;
+        fn from(file: QString, mode: OpenFlags) -> UniquePtr<KConfig>;
 
         type KConfigAccessMode;
+        type OpenFlag;
+        type OpenFlags = super::OpenFlags;
     }
 
     unsafe extern "C++" {
@@ -65,6 +82,9 @@ mod ffi {
         fn reparseConfiguration(self: Pin<&mut KConfig>);
 
         fn addConfigSources(self: Pin<&mut KConfig>, sources: &QStringList);
+
+        // QStandardPaths::StandardLocation locationType() const;
+
     }
 
     #[namespace = "rust::kf6"]
@@ -76,13 +96,30 @@ mod ffi {
     }
 }
 
+bitflags! {
+    #[repr(C)]
+    pub struct OpenFlags: u32 {
+        const IncludeGlobals = 1;
+        const CascadeConfig = 2;
+        const SimpleConfig = 0;
+        const NoCascade = 1;
+        const NoGlobals = 2;
+        const FullConfig = 3;
+    }
+}
+
 pub use ffi::KConfig;
 pub use ffi::KConfigAccessMode;
 
 impl KConfig {
-    pub fn from(file: QString) -> UniquePtr<KConfig> {
-        ffi::from(file)
+    pub fn from(file: QString, mode: OpenFlags) -> UniquePtr<KConfig> {
+        ffi::from(file, mode)
     }
+}
+
+unsafe impl ExternType for OpenFlags {
+    type Id = type_id!("rust::kf6::kconfig::OpenFlags");
+    type Kind = cxx::kind::Trivial;
 }
 
 #[cfg(test)]
@@ -93,7 +130,7 @@ mod tests {
 
     #[test]
     fn test_add() {
-        let mut config = KConfig::from(QString::from("kdeglobals"));
+        let mut config = KConfig::from(QString::from("kdeglobals"), OpenFlags::FullConfig);
 
         let mut group = config.as_mut().unwrap().group(&QString::from("General"));
 

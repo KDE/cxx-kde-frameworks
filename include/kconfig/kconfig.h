@@ -6,8 +6,9 @@
 #include <KConfig>
 
 namespace rust::kf6::kconfig {
-    std::unique_ptr<KConfig> from(QString file);
+    std::unique_ptr<KConfig> from(QString file, KConfig::OpenFlags mode);
 
     using KConfigAccessMode = KConfigBase::AccessMode;
-
+    using OpenFlag = KConfig::OpenFlag;
+    using OpenFlags = KConfig::OpenFlags;
 }
