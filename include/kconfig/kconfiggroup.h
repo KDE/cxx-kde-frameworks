@@ -12,4 +12,10 @@ namespace rust {
     struct IsRelocatable<KConfigGroup> : ::std::true_type
     {};
 
+    namespace kf6 {
+    }
+
 }
+
+using WriteConfigFlag = KConfigBase::WriteConfigFlag;
+using WriteConfigFlags = KConfigBase::WriteConfigFlags;

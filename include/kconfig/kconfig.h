@@ -7,4 +7,7 @@
 
 namespace rust::kf6::kconfig {
     std::unique_ptr<KConfig> from(QString file);
+
+    using KConfigAccessMode = KConfigBase::AccessMode;
+
 }

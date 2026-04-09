@@ -6,3 +6,6 @@ mod kconfiggroup;
 
 pub use kconfig::KConfig;
 pub use kconfiggroup::KConfigGroup;
+pub use kconfiggroup::WriteConfigFlag;
+pub use kconfiggroup::WriteConfigFlags;
+pub use kconfig::KConfigAccessMode;

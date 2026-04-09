@@ -1,17 +1,26 @@
 // SPDX-FileCopyrightText: 2026 Nicolas Fella <nicolas.fell@gmx.de>
 // SPDX-License-Identifier: MPL-2.0
 
-use crate::kconfig::KConfigGroup;
-use cxx::{type_id, ExternType, UniquePtr};
+use cxx::{UniquePtr};
 use cxx_qt_lib::QString;
-use std::mem::MaybeUninit;
+use crate::kconfig::{WriteConfigFlags};
 
 #[cxx_qt::bridge()]
 mod ffi {
 
     #[namespace = "rust::kf6::kconfig"]
+    #[repr(i32)]
+    pub enum KConfigAccessMode {
+        NoAccess = 0,
+        ReadOnly = 1,
+        ReadWrite = 2,
+    }
+
+    #[namespace = "rust::kf6::kconfig"]
     unsafe extern "C++" {
         fn from(file: QString) -> UniquePtr<KConfig>;
+
+        type KConfigAccessMode;
     }
 
     unsafe extern "C++" {
@@ -25,16 +34,21 @@ mod ffi {
 
         include!("cxx-kde-frameworks/kconfiggroup.h");
         type KConfigGroup = crate::kconfig::KConfigGroup;
+        type WriteConfigFlags = crate::kconfig::WriteConfigFlags;
 
         fn groupList(self: &KConfig) -> QStringList;
 
+        fn hasGroup(self: &KConfig, group: &QString) -> bool;
+
         fn group(self: Pin<&mut KConfig>, group: &QString) -> KConfigGroup;
 
-        fn hasGroup(self: &KConfig, group: &QString) -> bool;
+        fn deleteGroup(self: Pin<&mut KConfig>, group: &QString, flags: WriteConfigFlags);
 
         fn sync(self: Pin<&mut KConfig>) -> bool;
 
         fn markAsClean(self: Pin<&mut KConfig>);
+
+        fn accessMode(self: &KConfig) -> KConfigAccessMode;
 
         fn isImmutable(self: &KConfig) -> bool;
 
@@ -63,6 +77,7 @@ mod ffi {
 }
 
 pub use ffi::KConfig;
+pub use ffi::KConfigAccessMode;
 
 impl KConfig {
     pub fn from(file: QString) -> UniquePtr<KConfig> {
@@ -80,8 +95,12 @@ mod tests {
     fn test_add() {
         let mut config = KConfig::from(QString::from("kdeglobals"));
 
-        let group = config.as_mut().unwrap().group(&QString::from("General"));
+        let mut group = config.as_mut().unwrap().group(&QString::from("General"));
 
-        let s = group.readEntry(&QString::from("ColorSchemeHash"), &QString::from("12345"));
+        let _s = group.readEntry(&QString::from("ColorSchemeHash"), &QString::from("12345"));
+
+        group.exists();
+
+        group.writeEntry(&QString::from("ColorSchemeHash"), &QString::from("5"), WriteConfigFlags::Normal);
     }
 }

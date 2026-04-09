@@ -8,6 +8,7 @@ edition = "2021"
 links = "cxx-kde-frameworks"
 
 [dependencies]
+bitflags = "2.11.0"
 cxx = "1.0.192"
 cxx-qt = "0.8.0"
 cxx-qt-lib = { features = ["qt_full"], version = "0.8.0" }
