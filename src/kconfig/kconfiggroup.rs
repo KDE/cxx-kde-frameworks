@@ -34,6 +34,22 @@ mod ffi {
 
         fn config(self: &KConfigGroup) -> *const KConfig;
 
+        // void copyTo(KConfigBase *other, WriteConfigFlags pFlags = Normal) const;
+
+        fn moveValuesTo(self: &mut KConfigGroup, other: &mut KConfigGroup, flags: WriteConfigFlags);
+
+        fn parent(self: &KConfigGroup) -> KConfigGroup;
+
+        fn keyList(self: &KConfigGroup) -> QStringList;
+
+        fn deleteGroup(self: &mut KConfigGroup, group: &QString, flags: WriteConfigFlags);
+
+        fn hasDefault(self: &KConfigGroup, key: &QString) -> bool;
+
+        fn revertToDefault(self: &mut KConfigGroup, key: &QString, flags: WriteConfigFlags);
+
+        fn isEntryImmutable(self: &KConfigGroup, key: &QString) -> bool;
+
     }
 
     #[namespace = "rust::kf6"]
