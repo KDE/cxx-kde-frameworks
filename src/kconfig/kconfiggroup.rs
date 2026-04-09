@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 use bitflags::bitflags;
+use crate::kconfig::KConfig;
 
 #[cxx_qt::bridge]
 mod ffi {
@@ -13,6 +14,9 @@ mod ffi {
         include!("cxx-qt-lib/qstringlist.h");
         type QStringList = cxx_qt_lib::QStringList;
 
+        include!("cxx-kde-frameworks/kconfig.h");
+        type KConfig = crate::kconfig::KConfig;
+
         include!("cxx-kde-frameworks/kconfiggroup.h");
         type KConfigGroup = super::KConfigGroup;
         type WriteConfigFlag;
@@ -23,9 +27,20 @@ mod ffi {
         fn writeEntry(self: &mut KConfigGroup, key: &QString, value: &QString, flags: WriteConfigFlags);
 
         fn exists(self: &KConfigGroup) -> bool;
+
+        fn isValid(self: &KConfigGroup) -> bool;
+
+        fn name(self: &KConfigGroup) -> QString;
+
+        fn config(self: &KConfigGroup) -> *const KConfig;
+
     }
 
-    // #[namespace = "rust::kf6"]
+    #[namespace = "rust::kf6"]
+    unsafe extern "C++" {
+        fn config_mut(self_: &mut KConfigGroup) -> *mut KConfig;
+    }
+
     #[derive(Debug)]
     #[repr(u32)]
     enum WriteConfigFlag {
@@ -75,6 +90,13 @@ pub struct KConfigGroup {
 impl Drop for KConfigGroup {
     fn drop(&mut self) {
         ffi::kconfiggroup_drop(self);
+    }
+}
+
+impl KConfigGroup {
+    pub fn config_mut(self: &mut KConfigGroup) -> *mut KConfig
+    {
+        ffi::config_mut(self)
     }
 }
 

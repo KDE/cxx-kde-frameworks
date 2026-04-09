@@ -12,3 +12,10 @@ static_assert(!::std::is_trivially_copy_constructible<KConfigGroup>::value);
 static_assert(!::std::is_trivially_destructible<KConfigGroup>::value);
 
 // static_assert(QTypeInfo<KConfigGroup::isRelocatable);
+
+namespace rust::kf6 {
+    KConfig *config_mut(KConfigGroup &self)
+    {
+        return self.config();
+    }
+}

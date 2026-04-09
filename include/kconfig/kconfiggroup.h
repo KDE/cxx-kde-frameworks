@@ -13,6 +13,7 @@ namespace rust {
     {};
 
     namespace kf6 {
+        KConfig *config_mut(KConfigGroup &self);
     }
 
 }

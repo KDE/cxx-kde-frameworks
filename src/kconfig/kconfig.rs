@@ -83,8 +83,27 @@ mod ffi {
 
         fn addConfigSources(self: Pin<&mut KConfig>, sources: &QStringList);
 
+        fn additionalConfigSources(self: &KConfig) -> QStringList;
+
         // QStandardPaths::StandardLocation locationType() const;
 
+        fn openFlags(self: &KConfig) -> OpenFlags;
+
+        fn isDirty(self: &KConfig) -> bool;
+
+        fn locale(self: &KConfig) -> QString;
+
+        fn setLocale(self: Pin<&mut KConfig>, locale: &QString) -> bool;
+
+        fn setReadDefaults(self: Pin<&mut KConfig>, readDefaults: bool);
+
+        fn readDefaults(self: &KConfig) -> bool;
+
+        // QMap<QString, QString> entryMap(const QString &aGroup = QString()) const;
+
+        // fn setMainConfigName(name: &QString);
+
+        // fn mainConfigName() -> QString;
     }
 
     #[namespace = "rust::kf6"]
