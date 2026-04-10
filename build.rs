@@ -102,7 +102,7 @@ fn link_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
     let mut directories = Vec::new();
 
     for (name, targets) in LIBRARIES {
-        match find_package(*name).find() {
+        match find_package(*name).verbose().find() {
             Err(err) => panic!("Cannot find {name}: {err:?}"),
             Ok(package) => {
                 for target in *targets {
