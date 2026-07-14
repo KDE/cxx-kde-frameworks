@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
-#![doc = include_str!("../README.md")]
+#![doc = include_str!("../../README.md")]
 
 // /// KCoreAddons provides classes built on top of QtCore to perform various tasks.
 // ///

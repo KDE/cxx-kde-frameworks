@@ -1,13 +1,13 @@
-# SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
-# SPDX-License-Identifier: MPL-2.0
+[workspace]
+resolver = "3"
+members = [
+    "cxx-kde-frameworks"
+]
 
-[package]
-name = "cxx-kde-frameworks"
-version = "0.1.0"
+[workspace.package]
 edition = "2024"
-links = "cxx-kde-frameworks"
 
-[dependencies]
+[workspace.dependencies]
 cxx = "1.0.192"
 # cxx-qt = "0.8.0"
 # cxx-qt-lib = { features = ["qt_full"], version = "0.8.0" }
@@ -15,7 +15,6 @@ cxx = "1.0.192"
 qtbridge = { path = "../qtbridge-rust/crates/qtbridge" }
 qtbridge-type-lib = { path = "../qtbridge-rust/crates/qtbridge-type-lib" }
 
-[build-dependencies]
 cc = "1"
 cmake-package = "0.1.10"
 cxx-build = { version = "1.0.158", features = [ "parallel" ] }
