@@ -6,7 +6,8 @@ resolver = "3"
 members = [
     "cxx-kde-frameworks",
 
-    "examples/simplemdviewer"
+    "examples/simplemdviewer",
+    "examples/kapp"
 ]
 
 [workspace.package]
@@ -19,6 +20,7 @@ cxx = "1.0.192"
 # cxx-qt-lib-extras = { version = "0.8.0" }
 qtbridge = { path = "../qtbridge-rust/crates/qtbridge" }
 qtbridge-type-lib = { path = "../qtbridge-rust/crates/qtbridge-type-lib" }
+cxx-kde-frameworks = { path = "cxx-kde-frameworks" }
 
 cc = "1"
 cmake-package = "0.1.10"
