@@ -22,21 +22,17 @@ mod ffi {
     }
 }
 
-// TODO: FIX DOCS
-
 ///
 /// [C++ API documentation](https://api.kde.org/klocalizedqmlcontext.html#setupLocalizedContext)
 ///
 /// # Usage
 /// ```no_run
-/// use cxx_qt_lib::QQmlApplicationEngine;
-/// use cxx_kde_frameworks::ki18n;
-/// use cxx_qt::casting::Upcast;
 ///
-/// let mut engine = QQmlApplicationEngine::new();
-/// if let Some(mut engine) = engine.as_mut() {
-///     ki18n::setup_localized_context(engine.as_mut().upcast_pin());
-/// }
+/// use qtbridge::QApp;
+/// use cxx_kde_frameworks::ki18n;
+///
+/// let mut app = QApp::new();
+/// ki18n::setup_localized_context(&mut app);
 /// ```
 
 #[allow(dead_code)]
