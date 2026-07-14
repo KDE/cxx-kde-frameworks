@@ -1,25 +1,28 @@
 // SPDX-FileCopyrightText: 2026 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
-#[cxx_qt::bridge]
-mod ffi {
-    extern "C++Qt" {
-        include!("cxx-qt-lib/qqmlengine.h");
-        type QQmlEngine = cxx_qt_lib::QQmlEngine;
+use qtbridge::QApp;
+use qtbridge_type_lib::QQmlApplicationEngine;
 
-        include!("cxx-kde-frameworks/klocalization.h");
+#[cxx::bridge]
+mod ffi {
+    unsafe extern "C++" {
+        include!("cxx-kde-frameworks/src/ki18n/klocalization.h");
+
+        include!(
+            "qtbridge-type-lib/src/generated/qml/qqmlapplicationengine/cpp/qqmlapplicationengine.h"
+        );
+        type QQmlApplicationEngine = super::QQmlApplicationEngine;
     }
 
-    #[namespace = "rust::kf6"]
-    unsafe extern "C++Qt" {
-        #[doc(hidden)]
-        #[rust_name = "setup_localized_context"]
-        fn setupLocalizedContext(engine: Pin<&mut QQmlEngine>);
+    #[namespace = "rust::bridge::klocalization"]
+    unsafe extern "C++" {
+        # [rust_name = inline_cpp_fn_setup_localized_context]
+        fn inlineCppFn_setupLocalizedContext(engine: Pin<&mut QQmlApplicationEngine>);
     }
 }
 
-use core::pin::Pin;
-use cxx_qt_lib::QQmlEngine;
+// TODO: FIX DOCS
 
 ///
 /// [C++ API documentation](https://api.kde.org/klocalizedqmlcontext.html#setupLocalizedContext)
@@ -36,6 +39,9 @@ use cxx_qt_lib::QQmlEngine;
 /// }
 /// ```
 
-pub fn setup_localized_context(engine: Pin<&mut QQmlEngine>) {
-    ffi::setup_localized_context(engine);
+#[allow(dead_code)]
+pub fn setup_localized_context(app: &mut QApp) {
+    if let Some(engine) = app.engine.as_mut() {
+        ffi::inline_cpp_fn_setup_localized_context(engine);
+    }
 }

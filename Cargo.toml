@@ -4,15 +4,20 @@
 [package]
 name = "cxx-kde-frameworks"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 links = "cxx-kde-frameworks"
 
 [dependencies]
 cxx = "1.0.192"
-cxx-qt = "0.8.0"
-cxx-qt-lib = { features = ["qt_full"], version = "0.8.0" }
-cxx-qt-lib-extras = { version = "0.8.0" }
+# cxx-qt = "0.8.0"
+# cxx-qt-lib = { features = ["qt_full"], version = "0.8.0" }
+# cxx-qt-lib-extras = { version = "0.8.0" }
+qtbridge = { path = "../qtbridge-rust/crates/qtbridge" }
+qtbridge-type-lib = { path = "../qtbridge-rust/crates/qtbridge-type-lib" }
 
 [build-dependencies]
+cc = "1"
 cmake-package = "0.1.10"
-cxx-qt-build = { features = ["link_qt_object_files"], version = "0.8.0" }
+cxx-build = { version = "1.0.158", features = [ "parallel" ] }
+# cxx-qt-build = { features = ["link_qt_object_files"], version = "0.8.0" }
+qtbridge-build-utils = { path = "../qtbridge-rust/crates/qtbridge-build-utils" }

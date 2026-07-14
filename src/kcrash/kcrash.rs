@@ -1,12 +1,15 @@
 // SPDX-FileCopyrightText: 2024 Jonah Brüchert <jbb@kaidan.im>
 // SPDX-License-Identifier: MPL-2.0
 
-#[cxx_qt::bridge]
+#[cxx::bridge]
 mod ffi {
-    #[namespace = "rust::kf6"]
+    unsafe  extern  "C++" {
+        include!("cxx-kde-frameworks/src/kcrash/kcrash.h");
+    }
+    
+    
+    #[namespace = "rust::bridge::kcrash"]
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/kcrash.h");
-
         #[rust_name = "initialize_kcrash"]
         fn initializeKCrash();
     }
