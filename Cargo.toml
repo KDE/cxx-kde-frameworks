@@ -18,12 +18,12 @@ cxx = "1.0.192"
 # cxx-qt = "0.8.0"
 # cxx-qt-lib = { features = ["qt_full"], version = "0.8.0" }
 # cxx-qt-lib-extras = { version = "0.8.0" }
-qtbridge = { path = "../qtbridge-rust/crates/qtbridge" }
-qtbridge-type-lib = { path = "../qtbridge-rust/crates/qtbridge-type-lib" }
+qtbridge = { git = "https://github.com/qt/qtbridge-rust.git" }
+qtbridge-type-lib = { git = "https://github.com/qt/qtbridge-rust.git" }
 cxx-kde-frameworks = { path = "cxx-kde-frameworks" }
 
 cc = "1"
 cmake-package = "0.1.10"
 cxx-build = { version = "1.0.158", features = [ "parallel" ] }
 # cxx-qt-build = { features = ["link_qt_object_files"], version = "0.8.0" }
-qtbridge-build-utils = { path = "../qtbridge-rust/crates/qtbridge-build-utils" }
+qtbridge-build-utils = { git = "https://github.com/qt/qtbridge-rust.git" }
