@@ -4,13 +4,8 @@
 [package]
 name = "simplemdviewer"
 version = "0.1.0"
-edition = "2021"
+edition.workspace = true
 
 [dependencies]
-cxx = "1.0.192"
-cxx-qt = "0.8.0"
-cxx-qt-lib = { version = "0.8.0",  features = ["qt_full"] }
 markdown = "1.0.0"
-
-[build-dependencies]
-cxx-qt-build = "0.8.0"
+qtbridge = { workspace = true }

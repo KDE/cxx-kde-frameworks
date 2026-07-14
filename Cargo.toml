@@ -1,7 +1,9 @@
 [workspace]
 resolver = "3"
 members = [
-    "cxx-kde-frameworks"
+    "cxx-kde-frameworks",
+
+    "examples/simplemdviewer"
 ]
 
 [workspace.package]

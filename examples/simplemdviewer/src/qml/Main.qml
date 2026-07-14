@@ -28,8 +28,6 @@ Kirigami.ApplicationWindow {
 
             MdConverter {
                 id: mdconverter
-
-                sourceText: sourceArea.text
             }
 
             ColumnLayout {
@@ -53,7 +51,7 @@ Kirigami.ApplicationWindow {
 
                     Controls.Button {
                         text: qsTr("Format")
-                        onClicked: formattedText.text = mdconverter.mdFormat()
+                        onClicked: formattedText.text = mdconverter.mdFormat(sourceArea.text)
                     }
 
                     Controls.Button {
