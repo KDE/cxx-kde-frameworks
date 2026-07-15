@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: MPL-2.0
 
 mod klocalization;
-// mod klocalizedstring;
+mod klocalizedstring;
 // mod kstringextensions;
 
 pub use klocalization::setup_localized_context;
-// pub use klocalizedstring::KLocalizedString;
+pub use klocalizedstring::KLocalizedString;
 // pub use kstringextensions::*;
