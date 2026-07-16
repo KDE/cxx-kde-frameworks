@@ -11,28 +11,30 @@
 #include "rustconv.h"
 
 namespace rust::bridge::klocalizedstring {
-    
+
 rust::String applicationDomain();
 void setApplicationDomain(rust::Str domain);
 
-// auto r_ki18n(rust::String text) -> std::unique_ptr<KLocalizedString>;
-// auto r_ki18nc(rust::String context, rust::String text)
-//     -> std::unique_ptr<KLocalizedString>;
-// auto r_ki18ncp(rust::String context, rust::String singular, rust::String plural)
-//     -> std::unique_ptr<KLocalizedString>;
-// auto r_ki18nd(rust::String domain, rust::String text)
-//     -> std::unique_ptr<KLocalizedString>;
-// auto r_ki18ndc(rust::String domain, rust::String context, rust::String text)
-//     -> std::unique_ptr<KLocalizedString>;
-// auto r_ki18ndcp(rust::String domain, rust::String context,
-//                 rust::String singular, rust::String plural)
-//     -> std::unique_ptr<KLocalizedString>;
-// auto r_ki18ndp(rust::String domain, rust::String singular, rust::String plural)
-//     -> std::unique_ptr<KLocalizedString>;
-// auto r_ki18np(rust::String singular, rust::String plural)
-//     -> std::unique_ptr<KLocalizedString>;
+KLocalizedString r_ki18n(rust::String text);
+KLocalizedString r_ki18nc(rust::String context, rust::String text);
+KLocalizedString r_ki18ncp(rust::String context, rust::String singular, rust::String plural);
+KLocalizedString r_ki18nd(rust::String domain, rust::String text);
+KLocalizedString r_ki18ndc(rust::String domain, rust::String context, rust::String text);
+KLocalizedString r_ki18ndcp(rust::String domain, rust::String context, rust::String singular, rust::String plural);
+KLocalizedString r_ki18ndp(rust::String domain, rust::String singular, rust::String plural);
+KLocalizedString r_ki18np(rust::String singular, rust::String plural);
 
 } // namespace rust::bridge::klocalizedstring
 
 
-#endif // _KLOCALIZEDSTRING_RUST_BRIDGE_H_ 
+namespace rust {
+
+template <>
+struct IsRelocatable<::KLocalizedString> : ::std::true_type
+{
+};
+
+} // namespace rust
+
+
+#endif // _KLOCALIZEDSTRING_RUST_BRIDGE_H_

@@ -3,8 +3,8 @@
 
 mod klocalization;
 mod klocalizedstring;
-// mod kstringextensions;
+mod kstringextensions;
 
 pub use klocalization::setup_localized_context;
 pub use klocalizedstring::KLocalizedString;
-// pub use kstringextensions::*;
+pub use kstringextensions::*;
