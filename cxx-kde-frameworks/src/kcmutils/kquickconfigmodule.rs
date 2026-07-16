@@ -7,7 +7,7 @@ mod ffi {
         include!("cxx-qt-lib/qstring.h");
         type QString = cxx_qt_lib::QString;
 
-        include!("cxx-kde-frameworks/kquickconfigmodule.h");
+        include!("cxx-kde-frameworks/src/kcmutils/kquickconfigmodule.h");
         type KQuickConfigModule;
 
         include!("cxx-kde-frameworks/kpluginmetadata.h");

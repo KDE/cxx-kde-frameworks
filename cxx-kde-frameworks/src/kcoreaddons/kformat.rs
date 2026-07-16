@@ -1,17 +1,16 @@
 // SPDX-FileCopyrightText: 2024 Nicolas Fella <nicolas.fell@gmx.de>
 // SPDX-License-Identifier: MPL-2.0
 
-use cxx::{type_id, ExternType};
-use cxx_qt_lib::QString;
+use cxx::{ExternType, type_id};
 use std::mem::MaybeUninit;
 
-#[cxx_qt::bridge()]
+#[cxx::bridge]
 mod ffi {
 
     /// This enum chooses what dialect is used for binary units.
     ///
     /// [C++ API documentation](https://api.kde.org/kformat.html#BinaryUnitDialect-enum)
-    #[namespace = "rust::kf6"]
+    #[namespace = "rust::bridge::kformat"]
     #[repr(i32)]
     pub enum KFormatBinaryUnitDialect {
         DefaultBinaryDialect = -1,
@@ -23,7 +22,7 @@ mod ffi {
     /// This enum chooses what dialect is used for binary units.
     ///
     /// [C++ API documentation](https://api.kde.org/kformat.html#BinarySizeUnits-enum)
-    #[namespace = "rust::kf6"]
+    #[namespace = "rust::bridge::kformat"]
     #[repr(i32)]
     pub enum KFormatBinarySizeUnits {
         DefaultBinaryUnits = -1,
@@ -41,7 +40,7 @@ mod ffi {
     /// These prefixes are used in KDE by the formatValue() function.
     ///
     /// [C++ API documentation](https://api.kde.org/kformat.html#UnitPrefix-enum)
-    #[namespace = "rust::kf6"]
+    #[namespace = "rust::bridge::kformat"]
     #[repr(i32)]
     enum KFormatUnitPrefix {
         AutoAdjust = -128,
@@ -68,24 +67,21 @@ mod ffi {
         Yotta,
     }
 
-    #[namespace = "rust::kf6"]
     unsafe extern "C++" {
-        #[rust_name = "format_spellout_duration"]
-        fn formatSpelloutDuration(fmt: &KFormat, msecs: u64) -> QString;
-
-        #[rust_name = "format_decimal_duration"]
-        fn formatDecimalDuration(fmt: &KFormat, msecs: u64, decimalPlaces: i32) -> QString;
-    }
-
-    unsafe extern "C++" {
-        include!("cxx-qt-lib/qstring.h");
-        type QString = cxx_qt_lib::QString;
-
-        include!("cxx-kde-frameworks/kformat.h");
+        include!("cxx-kde-frameworks/src/kcoreaddons/kformat.h");
         type KFormat = super::KFormat;
 
         // include!("cxx-qt-lib/qdate.h");
         // type QDate = cxx_qt_lib::QDate;
+    }
+
+    #[namespace = "rust::bridge::kformat"]
+    unsafe extern "C++" {
+        #[rust_name = "format_spellout_duration"]
+        fn formatSpelloutDuration(fmt: &KFormat, msecs: u64) -> String;
+
+        #[rust_name = "format_decimal_duration"]
+        fn formatDecimalDuration(fmt: &KFormat, msecs: u64, decimalPlaces: i32) -> String;
 
         /// Converts size from bytes to the appropriate string representation using the binary unit dialect dialect and the specific units units.
         ///
@@ -97,7 +93,7 @@ mod ffi {
             precision: i32,
             dialect: KFormatBinaryUnitDialect,
             units: KFormatBinarySizeUnits,
-        ) -> QString;
+        ) -> String;
 
         // TODO needs QLocale
         // QString formatRelativeDate(const QDate &date, QLocale::FormatType format) const;
@@ -111,24 +107,20 @@ mod ffi {
         fn formatValue(
             self: &KFormat,
             value: f64,
-            unit: &QString,
+            unit: &str,
             precision: i32,
             prefix: KFormatUnitPrefix,
             dialect: KFormatBinaryUnitDialect,
-        ) -> QString;
+        ) -> String;
 
-    }
-
-    #[namespace = "rust::kf6"]
-    unsafe extern "C++" {
         type KFormatBinaryUnitDialect;
         type KFormatBinarySizeUnits;
         type KFormatUnitPrefix;
     }
 
-    #[namespace = "rust::cxxqtlib1"]
+    #[namespace = "rust::bridge"]
     unsafe extern "C++" {
-        include!("cxx-qt-lib/common.h");
+        include!("cxx-kde-frameworks/src/utils/common.h");
 
         #[doc(hidden)]
         #[rust_name = "kformat_init_default"]
@@ -140,9 +132,9 @@ mod ffi {
     }
 }
 
-pub use ffi::KFormatBinarySizeUnits;
-pub use ffi::KFormatBinaryUnitDialect;
-pub use ffi::KFormatUnitPrefix;
+pub type BinarySizeUnits = ffi::KFormatBinarySizeUnits;
+pub type BinaryUnitDialect = ffi::KFormatBinaryUnitDialect;
+pub type UnitPrefix = ffi::KFormatUnitPrefix;
 
 /// Class for formatting numbers and datetimes.
 ///
@@ -165,18 +157,17 @@ impl Drop for KFormat {
 }
 
 impl KFormat {
-
     /// Given a number of milliseconds, converts that to a spell-out string containing the localized equivalent.
     ///
     /// [C++ API documentation](https://api.kde.org/kformat.html#formatSpelloutDuration)
-    pub fn format_spellout_duration(&self, msecs: u64) -> QString {
+    pub fn format_spellout_duration(&self, msecs: u64) -> String {
         ffi::format_spellout_duration(self, msecs)
     }
 
     /// Given a number of milliseconds, converts that to a string containing the localized equivalent to the requested decimal places.
     ///
     /// [C++ API documentation](https://api.kde.org/kformat.html#formatDecimalDuration)
-    pub fn format_decimal_duration(&self, msecs: u64, decimal_places: i32) -> QString {
+    pub fn format_decimal_duration(&self, msecs: u64, decimal_places: i32) -> String {
         ffi::format_decimal_duration(self, msecs, decimal_places)
     }
 }
@@ -193,8 +184,6 @@ unsafe impl ExternType for KFormat {
 mod tests {
     use super::*;
 
-    use cxx_qt_lib::QString;
-
     #[test]
     fn test_add() {
         std::env::set_var("LC_NUMERIC", "en_US.UTF-8");
@@ -203,22 +192,22 @@ mod tests {
 
         assert_eq!(
             fm.format_spellout_duration(1234),
-            QString::from("1 second(s)")
+            "1 second(s)"
         );
 
         assert_eq!(
             fm.format_decimal_duration(1234, 2),
-            QString::from("1.23 seconds")
+            "1.23 seconds"
         );
 
         assert_eq!(
             fm.format_byte_size(
                 55.0,
                 2,
-                KFormatBinaryUnitDialect::DefaultBinaryDialect,
-                KFormatBinarySizeUnits::UnitKiloByte
+                BinaryUnitDialect::DefaultBinaryDialect,
+                BinarySizeUnits::UnitKiloByte
             ),
-            QString::from("0.05 KiB")
+            "0.05 KiB"
         );
 
         // assert_eq!(

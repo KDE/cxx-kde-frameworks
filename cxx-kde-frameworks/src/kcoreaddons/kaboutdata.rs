@@ -5,7 +5,7 @@ use cxx::{type_id, ExternType};
 use ffi::kaboutperson_init;
 use std::mem::MaybeUninit;
 
-#[cxx_qt::bridge]
+#[cxx::bridge]
 mod ffi {
 
     unsafe extern "C++" {
