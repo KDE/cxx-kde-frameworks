@@ -19,15 +19,15 @@ pub mod kcrash;
 /// [C++ API documentation](https://api.kde.org/ki18n-module.html)
 pub mod ki18n;
 
-// /// This library contains classes to improve the handling of icons in applications using the KDE Frameworks.
-// ///
-// /// [C++ API documentation](https://api.kde.org/kiconthemes-module.html)
-// pub mod kiconthemes;
+/// This library contains classes to improve the handling of icons in applications using the KDE Frameworks.
+///
+/// [C++ API documentation](https://api.kde.org/kiconthemes-module.html)
+pub mod kiconthemes;
 
-// /// KConfigWidgets provides easy-to-use classes to create configuration dialogs, as well as a set of widgets which uses KConfig to store their settings.
-// ///
-// /// [C++ API documentation](https://api.kde.org/kconfigwidgets-module.html)
-// pub mod kconfigwidgets;
+/// KConfigWidgets provides easy-to-use classes to create configuration dialogs, as well as a set of widgets which uses KConfig to store their settings.
+///
+/// [C++ API documentation](https://api.kde.org/kconfigwidgets-module.html)
+pub mod kconfigwidgets;
 
 // /// KCMUtils is a collection of convenience classes and widgets to create config modules.
 // ///

@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: 2024 Jonah Brüchert <jbb@kaidan.im>
 // SPDX-License-Identifier: MPL-2.0
 
-#[cxx_qt::bridge]
+#[cxx::bridge]
 mod ffi {
     #[namespace = "KStyleManager"]
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/kstylemanager.h");
+        include!("cxx-kde-frameworks/src/kconfigwidgets/kstylemanager.h");
 
         /// Enforces the style configured by the user with fallback to the Breeze style.
         ///

@@ -1,17 +1,17 @@
 // SPDX-FileCopyrightText: 2024 Jonah Brüchert <jbb@kaidan.im>
 // SPDX-License-Identifier: MPL-2.0
 
-#[cxx_qt::bridge]
+#[cxx::bridge]
 mod ffi {
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/kicontheme.h");
+        include!("cxx-kde-frameworks/src/kiconthemes/kicontheme.h");
         type KIconTheme;
     }
 
-    #[namespace = "rust::kf6"]
+    #[namespace = "rust::bridge::kiconthemes"]
     unsafe extern "C++" {
-        #[rust_name = "init_icons"]
-        fn initIcons();
+        #[rust_name = "init_theme"]
+        fn initTheme();
     }
 }
 
@@ -25,6 +25,6 @@ impl ffi::KIconTheme {
     ///
     /// [C++ API documentation](https://api.kde.org/kicontheme.html#initTheme)
     pub fn init_theme() {
-        ffi::init_icons();
+        ffi::init_theme();
     }
 }

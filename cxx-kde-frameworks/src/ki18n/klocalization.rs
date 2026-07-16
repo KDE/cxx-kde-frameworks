@@ -27,7 +27,6 @@ mod ffi {
 ///
 /// # Usage
 /// ```no_run
-///
 /// use qtbridge::QApp;
 /// use cxx_kde_frameworks::ki18n;
 ///

@@ -3,11 +3,8 @@
 
 #include <KIconTheme>
 
-namespace rust {
-namespace kf6 {
+namespace rust::bridge::kiconthemes {
 
-void initIcons();
+void initTheme();
 
-} // namespace kf6
 } // namespace rust
-

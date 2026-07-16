@@ -10,8 +10,8 @@ const LIBRARIES: &[(&'static str, &'static [&'static str])] = &[
     // ("KF6CoreAddons", &["KF6::CoreAddons"]),
     ("KF6I18n", &["KF6::I18n", "KF6::I18nQml"]),
     ("KF6Crash", &["KF6::Crash"]),
-    // ("KF6IconThemes", &["KF6::IconThemes"]),
-    // ("KF6ConfigWidgets", &["KF6::ConfigWidgets"]),
+    ("KF6IconThemes", &["KF6::IconThemes"]),
+    ("KF6ConfigWidgets", &["KF6::ConfigWidgets"]),
     // ("KF6KCMUtils", &["KF6::KCMUtilsQuick"]),
 ];
 
@@ -22,8 +22,8 @@ const RUST_BRIDGES: &[&str] = &[
     "src/ki18n/klocalization.rs",
     "src/ki18n/klocalizedstring.rs",
     "src/kcrash/kcrash.rs",
-    // "src/kiconthemes/kicontheme",
-    // "src/kconfigwidgets/kstylemanager",
+    "src/kiconthemes/kicontheme.rs",
+    "src/kconfigwidgets/kstylemanager.rs",
     // "src/kcmutils/kquickconfigmodule",
 ];
 
@@ -34,7 +34,7 @@ const CPP_FILES: &[&str] = &[
     "src/ki18n/klocalization.cpp",
     "src/ki18n/klocalizedstring.cpp",
     "src/kcrash/kcrash.cpp",
-    // "src/kiconthemes/kicontheme",
+    "src/kiconthemes/kicontheme.cpp",
     // "src/kcmutils/kquickconfigmodule",
 ];
 
