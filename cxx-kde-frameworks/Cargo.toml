@@ -4,20 +4,20 @@
 [package]
 name = "cxx-kde-frameworks"
 version = "0.1.0"
-edition.workspace = true 
+edition.workspace = true
 links = "cxx-kde-frameworks"
 
 [dependencies]
 cxx = { workspace = true }
-# cxx-qt = "0.8.0"
-# cxx-qt-lib = { features = ["qt_full"], version = "0.8.0" }
-# cxx-qt-lib-extras = { version = "0.8.0" }
+cxx-qt = { workspace = true }
+cxx-qt-lib = { workspace = true }
+cxx-qt-lib-extras = { workspace = true }
 qtbridge = { workspace = true }
 qtbridge-type-lib = { workspace = true }
 
 [build-dependencies]
-cc = { workspace = true }
+# cc = { workspace = true }
 cmake-package = { workspace = true }
-cxx-build = { workspace = true }
-# cxx-qt-build = { features = ["link_qt_object_files"], version = "0.8.0" }
-qtbridge-build-utils = { workspace = true }
+# cxx-build = { workspace = true }
+cxx-qt-build = { workspace = true }
+# qtbridge-build-utils = { workspace = true }

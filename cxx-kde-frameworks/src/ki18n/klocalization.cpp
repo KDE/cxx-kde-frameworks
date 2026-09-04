@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 
-#include "cxx-kde-frameworks/src/ki18n/klocalization.h"
+#include "cxx-kde-frameworks/ki18n/klocalization.h"
 
 namespace rust::bridge::klocalization {
 

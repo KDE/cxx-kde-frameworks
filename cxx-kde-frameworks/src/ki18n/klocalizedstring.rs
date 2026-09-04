@@ -4,16 +4,15 @@
 use std::mem::MaybeUninit;
 
 use cxx::ExternType;
-use qtbridge_type_lib::QString;
 
 #[cxx::bridge]
 mod ffi {
 
     unsafe extern "C++" {
-        include!("qtbridge-type-lib/src/generated/core/qstring/cpp/qstring.h");
-        type QString = super::QString;
+        include!("cxx-qt-lib/qstring.h");
+        type QString = cxx_qt_lib::QString;
 
-        include!("cxx-kde-frameworks/src/ki18n/klocalizedstring.h");
+        include!("cxx-kde-frameworks/ki18n/klocalizedstring.h");
         type KLocalizedString = super::KLocalizedString;
     }
 

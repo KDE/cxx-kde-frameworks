@@ -5,7 +5,7 @@
 mod ffi {
     #[namespace = "KStyleManager"]
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/src/kconfigwidgets/kstylemanager.h");
+        include!("cxx-kde-frameworks/kconfigwidgets/kstylemanager.h");
 
         /// Enforces the style configured by the user with fallback to the Breeze style.
         ///

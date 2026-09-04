@@ -1,85 +1,24 @@
 // SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
+mod build_files;
 
+use build_files::{CPP_FILES, LIBRARIES, RUST_BRIDGES};
 use cmake_package;
-use qtbridge_build_utils::qt_build::QtInstallation;
-use std::path::Path;
-
-// list of (LibraryName, [LibraryTargets])
-const LIBRARIES: &[(&'static str, &'static [&'static str])] = &[
-    // ("KF6CoreAddons", &["KF6::CoreAddons"]),
-    ("KF6I18n", &["KF6::I18n", "KF6::I18nQml"]),
-    ("KF6Crash", &["KF6::Crash"]),
-    ("KF6IconThemes", &["KF6::IconThemes"]),
-    ("KF6ConfigWidgets", &["KF6::ConfigWidgets"]),
-    // ("KF6KCMUtils", &["KF6::KCMUtilsQuick"]),
-];
-
-const RUST_BRIDGES: &[&str] = &[
-    // "src/kcoreaddons/kaboutdata",
-    // "src/kcoreaddons/kformat",
-    // "src/kcoreaddons/kpluginmetadata",
-    "src/ki18n/klocalization.rs",
-    "src/ki18n/klocalizedstring.rs",
-    "src/kcrash/kcrash.rs",
-    "src/kiconthemes/kicontheme.rs",
-    "src/kconfigwidgets/kstylemanager.rs",
-    // "src/kcmutils/kquickconfigmodule",
-];
-
-const CPP_FILES: &[&str] = &[
-    // "src/kcoreaddons/kaboutdata",
-    // "src/kcoreaddons/kformat",
-    // "src/kcoreaddons/kpluginmetadata",
-    "src/ki18n/klocalization.cpp",
-    "src/ki18n/klocalizedstring.cpp",
-    "src/kcrash/kcrash.cpp",
-    "src/kiconthemes/kicontheme.cpp",
-    // "src/kcmutils/kquickconfigmodule",
-];
+use cxx_qt_build::CxxQtBuilder;
 
 fn main() {
-    let manifest_dir = std::env::var("CARGO_MANIFEST_DIR").unwrap();
-    let include_path = std::path::Path::new(&manifest_dir).join("src");
+    let mut builder = CxxQtBuilder::new()
+        .crate_include_root(Some("src/".to_owned()))
+        .files(RUST_BRIDGES)
+        .cpp_files(CPP_FILES);
 
-    // This becomes DEP_QTBRIDGE_TYPE_LIB_INCLUDE in dependents
-    println!("cargo:include={}", include_path.display());
-    println!("cargo::metadata=include={}", include_path.display());
+    builder = link_kf_libraries(builder);
 
-    let qt = QtInstallation::default();
-    for file in CPP_FILES {
-        println!("cargo::rerun-if-changed={file}");
-    }
-    let mut builder = cxx_build::bridges(RUST_BRIDGES);
-    builder
-        .std("c++17")
-        .flag_if_supported("/Zc:__cplusplus")
-        .flag_if_supported("/permissive-")
-        .include("src")
-        .include("../");
-    qt.configure_builder(&mut builder);
-
-    CPP_FILES.iter().for_each(|file| {
-        builder.file(file);
-        println!("cargo::rerun-if-changed={file}");
-        let h_path = Path::new(file).with_extension("").with_extension("h");
-        if h_path.is_file() {
-            println!("cargo::rerun-if-changed={}", h_path.to_str().unwrap());
-        }
-    });
-
-    let qt_modules = ["Core", "Gui", "Qml", "QmlIntegration"];
-    for include_dir in qt.include_dirs(qt_modules, true) {
-        builder.include(include_dir);
-    }
-    let qt_modules = ["Core", "Gui", "Qml"];
-    qt.link_modules(qt_modules);
-    link_libraries(&mut builder);
-
-    builder.compile("cxx-kde-frameworks");
+    let interface = builder.build();
+    interface.reexport_dependency("cxx-qt-lib").export();
 }
 
-fn link_libraries(builder: &mut cc::Build) {
+fn link_kf_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
     let mut directories = Vec::new();
 
     for (name, targets) in LIBRARIES {
@@ -97,7 +36,26 @@ fn link_libraries(builder: &mut cc::Build) {
         }
     }
 
-    for dir in &directories {
-        builder.include(dir);
+    // hack for qqmlintegration.h
+    match cmake_package::find_package("Qt6").components(["QmlIntegration".into()]).find() {
+        Err(err) => panic!("Cannot find Qt: {err:?}"),
+        Ok(package) => {
+            let res = package.target("Qt6::QmlIntegration");
+            if let Some(target) = res {
+                for dir in target.include_directories {
+                    directories.push(dir);
+                }
+            } else {
+                panic!("Couldn't find QmlIntegration {:?}", res);
+            }
+        }
+    }
+
+    unsafe {
+        builder.cc_builder(move |cc| {
+            for dir in &directories {
+                cc.include(dir);
+            }
+        })
     }
 }

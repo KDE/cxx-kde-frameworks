@@ -4,7 +4,7 @@
 #[cxx::bridge]
 mod ffi {
     unsafe  extern  "C++" {
-        include!("cxx-kde-frameworks/src/kcrash/kcrash.h");
+        include!("cxx-kde-frameworks/kcrash/kcrash.h");
     }
     
     

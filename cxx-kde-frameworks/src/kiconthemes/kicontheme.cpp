@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2024 Jonah Brüchert <jbb@kaidan.im>
 // SPDX-License-Identifier: MPL-2.0
 
-#include "cxx-kde-frameworks/src/kiconthemes/kicontheme.h"
+#include "cxx-kde-frameworks/kiconthemes/kicontheme.h"
 
 namespace rust::bridge::kiconthemes {
 

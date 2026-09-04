@@ -4,7 +4,7 @@
 #[cxx::bridge]
 mod ffi {
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/src/kiconthemes/kicontheme.h");
+        include!("cxx-kde-frameworks/kiconthemes/kicontheme.h");
         type KIconTheme;
     }
 

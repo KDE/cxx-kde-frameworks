@@ -7,12 +7,10 @@ use qtbridge_type_lib::QQmlApplicationEngine;
 #[cxx::bridge]
 mod ffi {
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/src/ki18n/klocalization.h");
+        include!("cxx-kde-frameworks/ki18n/klocalization.h");
 
-        include!(
-            "qtbridge-type-lib/src/generated/qml/qqmlapplicationengine/cpp/qqmlapplicationengine.h"
-        );
-        type QQmlApplicationEngine = super::QQmlApplicationEngine;
+        include!("cxx-qt-lib/qqmlapplicationengine.h");
+        type QQmlApplicationEngine = super::QQmlApplicationEngine; //TODO: Swap with QQmlEngine
     }
 
     #[namespace = "rust::bridge::klocalization"]
@@ -36,7 +34,7 @@ mod ffi {
 
 #[allow(dead_code)]
 pub fn setup_localized_context(app: &mut QApp) {
-    if let Some(engine) = app.engine.as_mut() {
-        ffi::inline_cpp_fn_setup_localized_context(engine);
-    }
+    // if let Some(engine) = app.engine.as_mut() {
+    //     ffi::inline_cpp_fn_setup_localized_context(engine);
+    // }
 }
