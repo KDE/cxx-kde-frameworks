@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
+// SPDX-License-Identifier: MPL-2.0
+
 // list of (LibraryName, [LibraryTargets])
 pub const LIBRARIES: &[(&'static str, &'static [&'static str])] = &[
     // ("KF6CoreAddons", &["KF6::CoreAddons"]),
