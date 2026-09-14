@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 #include "cxx-kde-frameworks/src/kcoreaddons/kformat.h"
-#include "cxx-kde-frameworks/src/utils/assertion_utils.h"
+#include "cxx-qt/assertion_utils.h"
 
 #include "qtbridge-type-lib/src/rustconv.h"
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 #include "cxx-kde-frameworks/src/kcoreaddons/kpluginmetadata.h"
-#include "cxx-kde-frameworks/src/utils/assertion_utils.h"
+#include "cxx-qt/assertion_utils.h"
 
 assert_alignment_and_size(KPluginMetaData, { ::std::size_t a0; });
 

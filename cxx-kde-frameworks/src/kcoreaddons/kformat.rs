@@ -120,7 +120,7 @@ mod ffi {
 
     #[namespace = "rust::bridge"]
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/src/utils/common.h");
+        include!("cxx-qt-lib/common.h");
 
         #[doc(hidden)]
         #[rust_name = "kformat_init_default"]
