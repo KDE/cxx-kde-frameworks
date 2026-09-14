@@ -11,7 +11,7 @@ links = "cxx-kde-frameworks"
 cxx = { workspace = true }
 cxx-qt = { workspace = true }
 cxx-qt-lib = { workspace = true }
-cxx-qt-lib-extras = { workspace = true }
+# cxx-qt-lib-extras = { workspace = true }
 qtbridge = { workspace = true }
 qtbridge-type-lib = { workspace = true }
 

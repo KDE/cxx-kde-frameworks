@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
-use qtbridge::{QApp, QmlRegister, qobject};
+use qtbridge::{QApp, QmlElement, qobject};
 // use std::env;
 
 #[derive(Default)]
@@ -15,7 +15,7 @@ impl Converter {
     }
 }
 
-impl QmlRegister for Converter {
+impl QmlElement for Converter {
     const URI: &str = "org.kde.simplemdviewer";
     const ELEMENT_NAME: &str = "MdConverter";
     const MINOR_VERSION: u8 = 1u8;

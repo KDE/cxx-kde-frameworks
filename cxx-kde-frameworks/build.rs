@@ -11,15 +11,27 @@ fn main() {
         .crate_include_root(Some("src/".to_owned()))
         .files(RUST_BRIDGES)
         .cpp_files(CPP_FILES);
+    
+    let mut include_dirs = Vec::new();
 
-    builder = link_kf_libraries(builder);
+    let type_lib_include = std::env::var("DEP_QTBRIDGE_TYPE_LIB_INCLUDE")
+    .expect("DEP_QTBRIDGE_TYPE_LIB_INCLUDE not set. This variable should have been set by qtbridge-type-lib");
+    include_dirs.push(type_lib_include);
+    
+    include_dirs.extend(link_kf_libraries());
+    
+    unsafe {
+        builder = builder.cc_builder(move |cc| {
+            cc.includes(include_dirs.clone());
+        });
+    }
 
     let interface = builder.build();
     interface.reexport_dependency("cxx-qt-lib").export();
 }
 
-fn link_kf_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
-    let mut directories = Vec::new();
+fn link_kf_libraries() -> Vec<String> {
+    let mut include_dirs = Vec::new();
 
     for (name, targets) in LIBRARIES {
         match cmake_package::find_package(*name).find() {
@@ -28,34 +40,23 @@ fn link_kf_libraries(builder: CxxQtBuilder) -> CxxQtBuilder {
                 for target in *targets {
                     let cmake_target = package.target(target.to_owned()).unwrap();
                     cmake_target.link();
-                    for dir in cmake_target.include_directories {
-                        directories.push(dir);
-                    }
+                    include_dirs.extend(cmake_target.include_directories);
                 }
             }
         }
     }
 
     // hack for qqmlintegration.h
-    match cmake_package::find_package("Qt6").components(["QmlIntegration".into()]).find() {
+    match cmake_package::find_package("Qt6")
+        .components(["QmlIntegration".into()])
+        .find()
+    {
         Err(err) => panic!("Cannot find Qt: {err:?}"),
-        Ok(package) => {
-            let res = package.target("Qt6::QmlIntegration");
-            if let Some(target) = res {
-                for dir in target.include_directories {
-                    directories.push(dir);
-                }
-            } else {
-                panic!("Couldn't find QmlIntegration {:?}", res);
-            }
-        }
+        Ok(package) => match package.target("Qt6::QmlIntegration") {
+            Some(target) => include_dirs.extend(target.include_directories),
+            None => panic!("Couldn't find QmlIntegration"),
+        },
     }
 
-    unsafe {
-        builder.cc_builder(move |cc| {
-            for dir in &directories {
-                cc.include(dir);
-            }
-        })
-    }
+    include_dirs
 }

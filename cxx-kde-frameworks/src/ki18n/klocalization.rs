@@ -34,7 +34,5 @@ mod ffi {
 
 #[allow(dead_code)]
 pub fn setup_localized_context(app: &mut QApp) {
-    // if let Some(engine) = app.engine.as_mut() {
-    //     ffi::inline_cpp_fn_setup_localized_context(engine);
-    // }
+    ffi::inline_cpp_fn_setup_localized_context(app.application_engine());
 }

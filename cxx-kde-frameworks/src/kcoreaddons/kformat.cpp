@@ -4,7 +4,7 @@
 #include "cxx-kde-frameworks/src/kcoreaddons/kformat.h"
 #include "cxx-kde-frameworks/src/utils/assertion_utils.h"
 
-#include "rustconv.h"
+#include "qtbridge-type-lib/src/rustconv.h"
 
 assert_alignment_and_size(KFormat, { ::std::size_t a0; });
 
