@@ -5,17 +5,26 @@ use cxx_kde_frameworks::kconfigwidgets::kstylemanager;
 use cxx_kde_frameworks::kcrash::KCrash;
 use cxx_kde_frameworks::ki18n::{self, KLocalizedString};
 use cxx_kde_frameworks::kiconthemes::KIconTheme;
+use cxx_qt_lib::{QGuiApplication, QQuickStyle, QString};
 use qtbridge::QApp;
 
 fn main() {
     let mut app = QApp::new();
-    
+
     KIconTheme::init_theme();
     KCrash::initialize();
     kstylemanager::init_style();
-    
+
     KLocalizedString::set_application_domain("kapp");
     ki18n::setup_localized_context(&mut app);
+
+    // To associate the executable to the installed desktop file
+    QGuiApplication::set_desktop_file_name(&QString::from("org.kde.kapp"));
+
+    // To ensure the style is set correctly
+    if std::env::var("QT_QUICK_CONTROLS_STYLE").is_err() {
+        QQuickStyle::set_style(&QString::from("org.kde.desktop"));
+    }
 
     app.load_qml(include_bytes!("qml/Main.qml"));
     app.run();

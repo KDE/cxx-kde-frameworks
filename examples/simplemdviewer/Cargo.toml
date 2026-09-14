@@ -9,3 +9,4 @@ edition.workspace = true
 [dependencies]
 markdown = "1.0.0"
 qtbridge = { workspace = true }
+cxx-qt-lib = { workspace = true }

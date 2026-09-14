@@ -16,8 +16,5 @@ qtbridge = { workspace = true }
 qtbridge-type-lib = { workspace = true }
 
 [build-dependencies]
-# cc = { workspace = true }
 cmake-package = { workspace = true }
-# cxx-build = { workspace = true }
 cxx-qt-build = { workspace = true }
-# qtbridge-build-utils = { workspace = true }

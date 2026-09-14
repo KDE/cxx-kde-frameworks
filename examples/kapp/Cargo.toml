@@ -8,4 +8,5 @@ edition.workspace = true
 
 [dependencies]
 qtbridge = { workspace = true }
+cxx-qt-lib = { workspace = true}
 cxx-kde-frameworks = { workspace = true }

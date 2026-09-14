@@ -16,7 +16,7 @@ edition = "2024"
 [workspace.dependencies]
 cxx = "1.0.192"
 cxx-qt = "0.10.0"
-cxx-qt-lib = { features = ["qt_gui", "qt_qml"], version = "0.10.0" }
+cxx-qt-lib = { features = ["qt_gui", "qt_qml", "qt_quickcontrols"], version = "0.10.0" }
 cxx-qt-lib-extras = { version = "0.10.0" }
 qtbridge = { git = "https://github.com/dphaldes/qtbridge-rust.git", branch = "kf" }
 qtbridge-type-lib = { git = "https://github.com/dphaldes/qtbridge-rust.git", branch = "kf" }

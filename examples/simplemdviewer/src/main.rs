@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
+use cxx_qt_lib::{QGuiApplication, QQuickStyle, QString};
 use qtbridge::{QApp, QmlElement, qobject};
-// use std::env;
 
 #[derive(Default)]
 pub struct Converter;
@@ -27,13 +27,13 @@ fn main() {
     let mut app = QApp::new();
     app.register::<Converter>();
 
-    // // To associate the executable to the installed desktop file
-    // QGuiApplication::set_desktop_file_name(&QString::from("org.kde.simplemdviewer"));
+    // To associate the executable to the installed desktop file
+    QGuiApplication::set_desktop_file_name(&QString::from("org.kde.simplemdviewer"));
 
-    // // To ensure the style is set correctly
-    // if env::var("QT_QUICK_CONTROLS_STYLE").is_err() {
-    //     QQuickStyle::set_style(&QString::from("org.kde.desktop"));
-    // }
+    // To ensure the style is set correctly
+    if std::env::var("QT_QUICK_CONTROLS_STYLE").is_err() {
+        QQuickStyle::set_style(&QString::from("org.kde.desktop"));
+    }
     
     app.load_qml(include_bytes!("qml/Main.qml"));
     app.run();
