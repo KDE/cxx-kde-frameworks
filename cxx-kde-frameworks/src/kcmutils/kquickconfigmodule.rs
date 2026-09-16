@@ -7,10 +7,10 @@ mod ffi {
         include!("cxx-qt-lib/qstring.h");
         type QString = cxx_qt_lib::QString;
 
-        include!("cxx-kde-frameworks/src/kcmutils/kquickconfigmodule.h");
+        include!("cxx-kde-frameworks/kcmutils/kquickconfigmodule.h");
         type KQuickConfigModule;
 
-        include!("cxx-kde-frameworks/kpluginmetadata.h");
+        include!("cxx-kde-frameworks/kcoreaddons/kpluginmetadata.h");
         type KPluginMetaData = crate::kcoreaddons::KPluginMetaData;
 
         /// Returns true when the module has something changed and needs save.

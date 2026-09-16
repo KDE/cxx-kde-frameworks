@@ -29,7 +29,7 @@ pub mod kiconthemes;
 /// [C++ API documentation](https://api.kde.org/kconfigwidgets-module.html)
 pub mod kconfigwidgets;
 
-// /// KCMUtils is a collection of convenience classes and widgets to create config modules.
-// ///
-// /// [C++ API documentation](https://api.kde.org/kcmutils-index.html)
-// pub mod kcmutils;
+/// KCMUtils is a collection of convenience classes and widgets to create config modules.
+///
+/// [C++ API documentation](https://api.kde.org/kcmutils-index.html)
+pub mod kcmutils;

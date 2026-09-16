@@ -8,7 +8,7 @@ pub const LIBRARIES: &[(&'static str, &'static [&'static str])] = &[
     ("KF6Crash", &["KF6::Crash"]),
     ("KF6IconThemes", &["KF6::IconThemes"]),
     ("KF6ConfigWidgets", &["KF6::ConfigWidgets"]),
-    // ("KF6KCMUtils", &["KF6::KCMUtilsQuick"]),
+    ("KF6KCMUtils", &["KF6::KCMUtilsQuick"]),
 ];
 
 pub const RUST_BRIDGES: &[&str] = &[
@@ -20,7 +20,7 @@ pub const RUST_BRIDGES: &[&str] = &[
     "src/kcrash/kcrash.rs",
     "src/kiconthemes/kicontheme.rs",
     "src/kconfigwidgets/kstylemanager.rs",
-    // "src/kcmutils/kquickconfigmodule",
+    "src/kcmutils/kquickconfigmodule.rs",
 ];
 
 pub const CPP_FILES: &[&str] = &[
@@ -31,5 +31,5 @@ pub const CPP_FILES: &[&str] = &[
     "src/ki18n/klocalizedstring.cpp",
     "src/kcrash/kcrash.cpp",
     "src/kiconthemes/kicontheme.cpp",
-    // "src/kcmutils/kquickconfigmodule",
+    "src/kcmutils/kquickconfigmodule.cpp",
 ];
