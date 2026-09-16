@@ -3,7 +3,7 @@
 
 // list of (LibraryName, [LibraryTargets])
 pub const LIBRARIES: &[(&'static str, &'static [&'static str])] = &[
-    // ("KF6CoreAddons", &["KF6::CoreAddons"]),
+    ("KF6CoreAddons", &["KF6::CoreAddons"]),
     ("KF6I18n", &["KF6::I18n", "KF6::I18nQml"]),
     ("KF6Crash", &["KF6::Crash"]),
     ("KF6IconThemes", &["KF6::IconThemes"]),
@@ -12,9 +12,9 @@ pub const LIBRARIES: &[(&'static str, &'static [&'static str])] = &[
 ];
 
 pub const RUST_BRIDGES: &[&str] = &[
-    // "src/kcoreaddons/kaboutdata",
-    // "src/kcoreaddons/kformat",
-    // "src/kcoreaddons/kpluginmetadata",
+    "src/kcoreaddons/kaboutdata.rs",
+    "src/kcoreaddons/kformat.rs",
+    "src/kcoreaddons/kpluginmetadata.rs",
     "src/ki18n/klocalization.rs",
     "src/ki18n/klocalizedstring.rs",
     "src/kcrash/kcrash.rs",
@@ -24,9 +24,9 @@ pub const RUST_BRIDGES: &[&str] = &[
 ];
 
 pub const CPP_FILES: &[&str] = &[
-    // "src/kcoreaddons/kaboutdata",
-    // "src/kcoreaddons/kformat",
-    // "src/kcoreaddons/kpluginmetadata",
+    "src/kcoreaddons/kaboutdata.cpp",
+    "src/kcoreaddons/kformat.cpp",
+    "src/kcoreaddons/kpluginmetadata.cpp",
     "src/ki18n/klocalization.cpp",
     "src/ki18n/klocalizedstring.cpp",
     "src/kcrash/kcrash.cpp",

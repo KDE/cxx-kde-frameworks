@@ -1,11 +1,17 @@
 // SPDX-FileCopyrightText: 2024 Nicolas Fella <nicolas.fell@gmx.de>
 // SPDX-License-Identifier: MPL-2.0
 
-#[cxx::bridge]
+#[cxx_qt::bridge]
 mod ffi {
     unsafe extern "C++" {
+        
+        include!("cxx-qt-lib/qstring.h");
+        type QString = cxx_qt_lib::QString;
 
-        include!("cxx-kde-frameworks/kpluginmetadata.h");
+        include!("cxx-qt-lib/qstringlist.h");
+        type QStringList = cxx_qt_lib::QStringList;
+
+        include!("cxx-kde-frameworks/kcoreaddons/kpluginmetadata.h");
         type KPluginMetaData = super::KPluginMetaData;
 
         /// Returns whether this object holds valid information about a plugin.
@@ -144,7 +150,7 @@ mod ffi {
         fn isStaticPlugin(self: &KPluginMetaData) -> bool;
     }
 
-    #[namespace = "rust::bridge"]
+    #[namespace = "rust::cxxqtlib1"]
     unsafe extern "C++" {
         include!("cxx-qt-lib/common.h");
 

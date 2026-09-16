@@ -4,15 +4,22 @@
 use cxx::{ExternType, type_id};
 use std::mem::MaybeUninit;
 
-#[cxx::bridge]
+#[cxx_qt::bridge]
 mod ffi {
+    unsafe extern "C++" {
+        include!("cxx-kde-frameworks/kcoreaddons/kformat.h");
+        type KFormat = super::KFormat;
+
+        include!("cxx-qt-lib/qdate.h");
+        type QDate = cxx_qt_lib::QDate;
+    }
 
     /// This enum chooses what dialect is used for binary units.
     ///
     /// [C++ API documentation](https://api.kde.org/kformat.html#BinaryUnitDialect-enum)
     #[namespace = "rust::bridge::kformat"]
     #[repr(i32)]
-    pub enum KFormatBinaryUnitDialect {
+    enum KFormatBinaryUnitDialect {
         DefaultBinaryDialect = -1,
         IECBinaryDialect = 0,
         JEDECBinaryDialect = 1,
@@ -24,7 +31,7 @@ mod ffi {
     /// [C++ API documentation](https://api.kde.org/kformat.html#BinarySizeUnits-enum)
     #[namespace = "rust::bridge::kformat"]
     #[repr(i32)]
-    pub enum KFormatBinarySizeUnits {
+    enum KFormatBinarySizeUnits {
         DefaultBinaryUnits = -1,
         UnitByte,
         UnitKiloByte,
@@ -67,14 +74,6 @@ mod ffi {
         Yotta,
     }
 
-    unsafe extern "C++" {
-        include!("cxx-kde-frameworks/src/kcoreaddons/kformat.h");
-        type KFormat = super::KFormat;
-
-        // include!("cxx-qt-lib/qdate.h");
-        // type QDate = cxx_qt_lib::QDate;
-    }
-
     #[namespace = "rust::bridge::kformat"]
     unsafe extern "C++" {
         #[rust_name = "format_spellout_duration"]
@@ -88,7 +87,7 @@ mod ffi {
         /// [C++ API documentation](https://api.kde.org/kformat.html#formatByteSize)
         #[rust_name = "format_byte_size"]
         fn formatByteSize(
-            self: &KFormat,
+            fmt: &KFormat,
             size: f64,
             precision: i32,
             dialect: KFormatBinaryUnitDialect,
@@ -105,7 +104,7 @@ mod ffi {
         /// [C++ API documentation](https://api.kde.org/kformat.html#formatValue)
         #[rust_name = "format_value"]
         fn formatValue(
-            self: &KFormat,
+            fmt: &KFormat,
             value: f64,
             unit: &str,
             precision: i32,
@@ -118,7 +117,7 @@ mod ffi {
         type KFormatUnitPrefix;
     }
 
-    #[namespace = "rust::bridge"]
+    #[namespace = "rust::cxxqtlib1"]
     unsafe extern "C++" {
         include!("cxx-qt-lib/common.h");
 
@@ -170,6 +169,27 @@ impl KFormat {
     pub fn format_decimal_duration(&self, msecs: u64, decimal_places: i32) -> String {
         ffi::format_decimal_duration(self, msecs, decimal_places)
     }
+
+    pub fn format_byte_size(
+        &self,
+        size: f64,
+        precision: i32,
+        dialect: BinaryUnitDialect,
+        units: BinarySizeUnits,
+    ) -> String {
+        ffi::format_byte_size(self, size, precision, dialect, units)
+    }
+
+    pub fn format_value(
+        &self,
+        value: f64,
+        unit: &str,
+        precision: i32,
+        prefix: UnitPrefix,
+        dialect: BinaryUnitDialect,
+    ) -> String {
+        ffi::format_value(self, value, unit, precision, prefix, dialect)
+    }
 }
 
 // Safety:
@@ -186,19 +206,15 @@ mod tests {
 
     #[test]
     fn test_add() {
-        std::env::set_var("LC_NUMERIC", "en_US.UTF-8");
+        unsafe {
+            std::env::set_var("LC_NUMERIC", "en_US.UTF-8");
+        }
 
         let fm = KFormat::default();
 
-        assert_eq!(
-            fm.format_spellout_duration(1234),
-            "1 second(s)"
-        );
+        assert_eq!(fm.format_spellout_duration(1234), "1 second(s)");
 
-        assert_eq!(
-            fm.format_decimal_duration(1234, 2),
-            "1.23 seconds"
-        );
+        assert_eq!(fm.format_decimal_duration(1234, 2), "1.23 seconds");
 
         assert_eq!(
             fm.format_byte_size(
@@ -209,6 +225,17 @@ mod tests {
             ),
             "0.05 KiB"
         );
+        
+        assert_eq!(
+               fm.format_value(
+                   1024f64,
+                   "B/s",
+                   1, 
+                   UnitPrefix::AutoAdjust,
+                   BinaryUnitDialect::IECBinaryDialect,
+               ),
+               "1.0 KiB/s"
+           );
 
         // assert_eq!(
         //     fm.format_relative_date(

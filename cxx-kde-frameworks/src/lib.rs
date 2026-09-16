@@ -3,10 +3,10 @@
 
 #![doc = include_str!("../../README.md")]
 
-// /// KCoreAddons provides classes built on top of QtCore to perform various tasks.
-// ///
-// /// [C++ API documentation](https://api.kde.org/kcoreaddons-module.html)
-// pub mod kcoreaddons;
+/// KCoreAddons provides classes built on top of QtCore to perform various tasks.
+///
+/// [C++ API documentation](https://api.kde.org/kcoreaddons-module.html)
+pub mod kcoreaddons;
 
 /// KCrash provides support for intercepting and handling application crashes.
 ///

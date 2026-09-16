@@ -9,12 +9,17 @@
 
 namespace rust::bridge::kaboutdata {
 
-auto from(QString componentName, QString displayName, QString version,
-          QString shortDescription, int license) -> KAboutData;
+auto constructKAboutData(rust::Str componentName, rust::Str displayName, rust::Str version,
+          rust::Str shortDescription, int license) -> std::unique_ptr<KAboutData>;
 
 void setApplicationData(const KAboutData &aboutData);
-
 } // namespace rust::bridge::kaboutdata
+
+namespace rust::bridge::kaboutperson {
+    auto constructKAboutPerson(rust::Str name, rust::Str task, rust::Str email_address, rust::Str web_address,
+              const QUrl &avatar_url) -> KAboutPerson;
+}
+
 
 namespace rust {
 

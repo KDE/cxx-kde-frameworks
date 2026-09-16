@@ -3,7 +3,7 @@
 
 
 #ifndef _KFORMAT_RUST_BRIDGE_H_
-#define  _KFORMAT_RUST_BRIDGE_H_
+#define _KFORMAT_RUST_BRIDGE_H_
 
 #include <KFormat>
 

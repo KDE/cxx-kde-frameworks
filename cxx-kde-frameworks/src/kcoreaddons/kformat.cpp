@@ -1,10 +1,9 @@
 // SPDX-FileCopyrightText: 2024 Nicolas Fella <nicolas.fell@gmx.de>
 // SPDX-License-Identifier: MPL-2.0
 
-#include "cxx-kde-frameworks/src/kcoreaddons/kformat.h"
-#include "cxx-qt/assertion_utils.h"
-
-#include "qtbridge-type-lib/src/rustconv.h"
+#include "cxx-kde-frameworks/kcoreaddons/kformat.h"
+#include "cxx-qt-lib/assertion_utils.h"
+#include "rustconv.h"
 
 assert_alignment_and_size(KFormat, { ::std::size_t a0; });
 
@@ -33,4 +32,4 @@ rust::String formatValue(const KFormat &fmt, double value, rust::Str unit, int32
     return QStringToRustString(fmt.formatValue(value, RustStrToQString(unit), precision, prefix, dialect));
 }
 
-} // namespace rust::bridge::kfromat
+} // namespace rust::bridge::kformat

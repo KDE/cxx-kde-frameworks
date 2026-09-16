@@ -1,13 +1,11 @@
 // SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
 // SPDX-License-Identifier: MPL-2.0
 
-use cxx::{type_id, ExternType};
-use ffi::kaboutperson_init;
+use cxx::{ExternType, type_id};
 use std::mem::MaybeUninit;
 
-#[cxx::bridge]
+#[cxx_qt::bridge]
 mod ffi {
-
     unsafe extern "C++" {
         include!("cxx-qt-lib/qstring.h");
         type QString = cxx_qt_lib::QString;
@@ -17,7 +15,7 @@ mod ffi {
         include!("cxx-qt-lib-extras/core/qcommandlineparser.h");
         type QCommandLineParser = cxx_qt_lib_extras::QCommandLineParser;
 
-        include!("cxx-kde-frameworks/kaboutdata.h");
+        include!("cxx-kde-frameworks/kcoreaddons/kaboutdata.h");
         type KAboutData;
         type KAboutPerson = super::KAboutPerson;
 
@@ -68,7 +66,11 @@ mod ffi {
         ///
         /// [C++ API documentation](https://api.kde.org/kaboutdata.html#setTranslator)
         #[rust_name = "set_translator"]
-        fn setTranslator(self: Pin<&mut KAboutData>, name: &QString, email_address: &QString) -> Pin<&mut KAboutData>;
+        fn setTranslator(
+            self: Pin<&mut KAboutData>,
+            name: &QString,
+            email_address: &QString,
+        ) -> Pin<&mut KAboutData>;
 
         #[doc(hidden)]
         #[rust_name = "setup_command_line_raw"]
@@ -82,13 +84,16 @@ mod ffi {
         unsafe fn processCommandLine(self: Pin<&mut KAboutData>, parser: *mut QCommandLineParser);
     }
 
-    #[namespace = "rust::kf6"]
+    #[namespace = "rust::bridge::kaboutdata"]
     unsafe extern "C++" {
-        fn from(
-            component_name: QString,
-            display_name: QString,
-            version: QString,
-            short_description: QString,
+
+        #[doc(hidden)]
+        #[rust_name = "kaboutdata_from"]
+        fn constructKAboutData(
+            component_name: &str,
+            display_name: &str,
+            version: &str,
+            short_description: &str,
             license: i32,
         ) -> UniquePtr<KAboutData>;
 
@@ -105,18 +110,21 @@ mod ffi {
         fn construct() -> KAboutPerson;
 
         #[doc(hidden)]
-        #[rust_name = "kaboutperson_init"]
-        fn construct(
-            name: &QString,
-            task: &QString,
-            email_address: &QString,
-            web_address: &QString,
-            avatar_url: &QUrl,
-        ) -> KAboutPerson;
-
-        #[doc(hidden)]
         #[rust_name = "kaboutperson_drop"]
         fn drop(format: &mut KAboutPerson);
+    }
+
+    #[namespace = "rust::bridge::kaboutperson"]
+    unsafe extern "C++" {
+        #[doc(hidden)]
+        #[rust_name = "kaboutperson_from"]
+        fn constructKAboutPerson(
+            name: &str,
+            task: &str,
+            email_address: &str,
+            web_address: &str,
+            avatar_url: &QUrl,
+        ) -> KAboutPerson;
     }
 }
 
@@ -131,7 +139,6 @@ pub struct KAboutPerson {
 use std::pin::Pin;
 
 use cxx::UniquePtr;
-use cxx_qt_lib::QString;
 use cxx_qt_lib::QUrl;
 use cxx_qt_lib_extras::QCommandLineParser;
 
@@ -145,13 +152,13 @@ pub use ffi::KAboutData;
 impl KAboutData {
     /// Create a new KAboutData
     pub fn from(
-        component_name: QString,
-        display_name: QString,
-        version: QString,
-        short_description: QString,
+        component_name: &str,
+        display_name: &str,
+        version: &str,
+        short_description: &str,
         license: License,
     ) -> UniquePtr<KAboutData> {
-        ffi::from(
+        ffi::kaboutdata_from(
             component_name,
             display_name,
             version,
@@ -187,13 +194,13 @@ impl KAboutData {
 impl KAboutPerson {
     /// Create a new KAboutPerson
     pub fn from(
-        name: &QString,
-        task: &QString,
-        email_address: &QString,
-        web_address: &QString,
+        name: &str,
+        task: &str,
+        email_address: &str,
+        web_address: &str,
         avatar_url: &QUrl,
     ) -> KAboutPerson {
-        kaboutperson_init(name, task, email_address, web_address, avatar_url)
+        ffi::kaboutperson_from(name, task, email_address, web_address, avatar_url)
     }
 }
 impl Default for KAboutPerson {
@@ -220,15 +227,26 @@ unsafe impl ExternType for KAboutPerson {
 mod tests {
     use super::*;
 
-    use cxx_qt_lib::QString;
     use cxx_qt_lib::QUrl;
 
     #[test]
     fn test_add() {
-        let mut about = KAboutData::from(QString::from("myapp"), QString::from("My App"), QString::from("1.0"), QString::from("An awesome app"), License::GPL);
+        let mut about = KAboutData::from("myapp", "My App", "1.0", "An awesome app", License::GPL);
 
-        about.pin_mut().add_author(&KAboutPerson::from(&QString::from("Me"), &QString::from("Author"), &QString::from("me@kde.org"), &QString::from("https://kde.org"), &QUrl::default()));
+        about.pin_mut().add_author(&KAboutPerson::from(
+            "Me",
+            "Author",
+            "me@kde.org",
+            "https://kde.org",
+            &QUrl::default(),
+        ));
 
-        about.pin_mut().add_credit(&KAboutPerson::from(&QString::from("Somebody"), &QString::from("Fixes"), &QString::from("someone@kde.org"), &QString::from("https://kde.org"), &QUrl::default()));
+        about.pin_mut().add_credit(&KAboutPerson::from(
+            "Somebody",
+            "Fixes",
+            "someone@kde.org",
+            "https://kde.org",
+            &QUrl::default(),
+        ));
     }
 }
