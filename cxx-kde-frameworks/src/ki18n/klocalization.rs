@@ -4,7 +4,7 @@
 use qtbridge::QApp;
 use qtbridge_type_lib::QQmlApplicationEngine;
 
-#[cxx::bridge]
+#[cxx_qt::bridge]
 mod ffi {
     unsafe extern "C++" {
         include!("cxx-kde-frameworks/ki18n/klocalization.h");

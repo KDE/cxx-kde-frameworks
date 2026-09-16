@@ -5,7 +5,7 @@ use std::mem::MaybeUninit;
 
 use cxx::ExternType;
 
-#[cxx::bridge]
+#[cxx_qt::bridge]
 mod ffi {
 
     unsafe extern "C++" {

@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2024 Jonah Brüchert <jbb@kaidan.im>
 // SPDX-License-Identifier: MPL-2.0
 
-#[cxx::bridge]
+#[cxx_qt::bridge]
 mod ffi {
     #[namespace = "KStyleManager"]
     unsafe extern "C++" {

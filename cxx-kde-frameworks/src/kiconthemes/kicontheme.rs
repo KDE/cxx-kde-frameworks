@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2024 Jonah Brüchert <jbb@kaidan.im>
 // SPDX-License-Identifier: MPL-2.0
 
-#[cxx::bridge]
+#[cxx_qt::bridge]
 mod ffi {
     unsafe extern "C++" {
         include!("cxx-kde-frameworks/kiconthemes/kicontheme.h");
