@@ -11,7 +11,7 @@ mod ffi {
         include!("cxx-qt-lib/qstringlist.h");
         type QStringList = cxx_qt_lib::QStringList;
 
-        include!("cxx-kde-frameworks/kpluginmetadata.h");
+        include!("cxx-kde-frameworks/kcoreaddons/kpluginmetadata.h");
         type KPluginMetaData = super::KPluginMetaData;
 
         /// Returns whether this object holds valid information about a plugin.

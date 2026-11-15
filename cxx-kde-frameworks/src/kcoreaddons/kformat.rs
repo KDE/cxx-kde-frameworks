@@ -81,7 +81,7 @@ mod ffi {
         include!("cxx-qt-lib/qstring.h");
         type QString = cxx_qt_lib::QString;
 
-        include!("cxx-kde-frameworks/kformat.h");
+        include!("cxx-kde-frameworks/kcoreaddons/kformat.h");
         type KFormat = super::KFormat;
 
         // include!("cxx-qt-lib/qdate.h");

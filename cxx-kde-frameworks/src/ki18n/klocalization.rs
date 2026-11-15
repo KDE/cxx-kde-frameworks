@@ -7,7 +7,7 @@ mod ffi {
         include!("cxx-qt-lib/qqmlengine.h");
         type QQmlEngine = cxx_qt_lib::QQmlEngine;
 
-        include!("cxx-kde-frameworks/klocalization.h");
+        include!("cxx-kde-frameworks/ki18n/klocalization.h");
     }
 
     #[namespace = "rust::kf6"]

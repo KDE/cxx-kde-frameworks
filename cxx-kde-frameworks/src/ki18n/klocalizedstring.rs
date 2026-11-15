@@ -13,7 +13,7 @@ mod ffi {
     }
 
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/klocalizedstring.h");
+        include!("cxx-kde-frameworks/ki18n/klocalizedstring.h");
         type KLocalizedString;
     }
 
