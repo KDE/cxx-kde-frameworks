@@ -12,7 +12,7 @@ include:
 cargo-build-test:
   extends: .ci_linux_base
   stage: build
-  image: storage.kde.org/vm-images/suse-qt611
+  image: s3.kde.org/ci-vm-images/suse-qt613
   tags:
     - VM
     - amd64
