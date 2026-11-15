@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2024 Nicolas Fella <nicolas.fell@gmx.de>
 // SPDX-License-Identifier: MPL-2.0
 
-#include "cxx-kde-frameworks/kformat.h"
+#include "cxx-kde-frameworks/kcoreaddons/kformat.h"
 #include <cxx-qt-lib/assertion_utils.h>
 
 assert_alignment_and_size(KFormat, { ::std::size_t a0; });

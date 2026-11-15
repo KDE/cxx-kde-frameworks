@@ -5,7 +5,7 @@
 mod ffi {
     #[namespace = "rust::kf6"]
     unsafe extern "C++" {
-        include!("cxx-kde-frameworks/kcrash.h");
+        include!("cxx-kde-frameworks/kcrash/kcrash.h");
 
         #[rust_name = "initialize_kcrash"]
         fn initializeKCrash();

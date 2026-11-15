@@ -17,7 +17,7 @@ mod ffi {
         include!("cxx-qt-lib-extras/core/qcommandlineparser.h");
         type QCommandLineParser = cxx_qt_lib_extras::QCommandLineParser;
 
-        include!("cxx-kde-frameworks/kaboutdata.h");
+        include!("cxx-kde-frameworks/kcoreaddons/kaboutdata.h");
         type KAboutData;
         type KAboutPerson = super::KAboutPerson;
 
