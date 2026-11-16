@@ -1,18 +1,23 @@
-# SPDX-FileCopyrightText: 2024 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
+# SPDX-FileCopyrightText: 2026 Darshan Phaldesai <dev.darshanphaldesai@gmail.com>
 # SPDX-License-Identifier: MPL-2.0
 
-[package]
-name = "cxx-kde-frameworks"
-version = "0.1.0"
-edition = "2021"
-links = "cxx-kde-frameworks"
+[workspace]
+resolver = '3'
+members = [
+    "cxx-kde-frameworks"
+]
 
-[dependencies]
+[workspace.package]
+edition = "2024"
+
+[workspace.dependencies]
 cxx = "1.0.192"
 cxx-qt = "0.10.0"
-cxx-qt-lib = { features = ["qt_full"], version = "0.10.0" }
+cxx-qt-lib = { version = "0.10.0", features = ["qt_gui", "qt_qml", "qt_quickcontrols"] }
 cxx-qt-lib-extras = { version = "0.10.0" }
-
-[build-dependencies]
-cmake-package = "0.1.10"
-cxx-qt-build = { features = ["link_qt_object_files"], version = "0.10.0" }
+qtbridge = "0.4.1"
+qtbridge-type-lib = "0.4.1"
+cxx-kde-frameworks = { path = "cxx-kde-frameworks" }
+# build dependencies
+cmake-package = "0.3.1"
+cxx-qt-build = { version = "0.10.0" }
