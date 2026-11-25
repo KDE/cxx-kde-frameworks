@@ -14,5 +14,5 @@ cxx-qt-lib = { features = ["qt_full"], version = "0.10.0" }
 cxx-qt-lib-extras = { version = "0.10.0" }
 
 [build-dependencies]
-cmake-package = "0.1.10"
+cmake-package = "0.3.1"
 cxx-qt-build = { features = ["link_qt_object_files"], version = "0.10.0" }
